@@ -1,0 +1,5 @@
+@import "./common.css";
+
+#quiz {
+  max-width: 1000px;
+}

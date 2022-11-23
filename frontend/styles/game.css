@@ -1,0 +1,37 @@
+@import "./common.css";
+
+#game {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* IT IS OKAY TO REMOVE CSS BELOW
+AND MAKE YOUR OWN */
+.panel-left,
+.panel-right {
+  border: 1px solid black;
+}
+
+.map {
+  width: 70vw;
+}
+
+.panel-right > * {
+  border: 1px solid salmon;
+}
+
+.wrapper {
+  height: 100px;
+}
+
+.wrapper.instruction {
+  height: 200px;
+}
+
+/* DO NOT REMOVE THE STYLE */
+.timezone-map.inactive {
+  display: none;
+}
