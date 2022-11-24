@@ -2,8 +2,7 @@
 # SETUP ROUTES
 from flask import Flask, request, Response
 import mysql
-import model.game
-import model.user
+import models  
 
 connection = mysql.connector.connect(
          host='127.0.0.1',
