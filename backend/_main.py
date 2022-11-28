@@ -46,5 +46,8 @@ def play_game():
 while user.co2_budget > 0: 
     play_game()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ceeca4c48f704f96f647570b5774883505bfbf4c
     

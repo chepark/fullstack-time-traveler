@@ -9,7 +9,7 @@ connection = mysql.connector.connect(
          port= 3306,
          database='flight_game',
          user='root',
-         password='',
+         password='1111',
          autocommit=True
          )
 
@@ -21,8 +21,6 @@ app = Flask(__name__)
 
 # USE
 # request.args.get("co2benefit")
-
-
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=5000)

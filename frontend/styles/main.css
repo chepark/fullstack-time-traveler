@@ -2,6 +2,7 @@
 @import "./quiz.css";
 @import "./game.css";
 @import "./timezone.css";
+
 #game {
   max-width: 1200px;
 }

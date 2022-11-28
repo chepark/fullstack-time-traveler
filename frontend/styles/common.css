@@ -22,6 +22,10 @@
   font-weight: 500;
 }
 
+/* How to use the color: 
+ex) div {
+  var(--lightGreen)
+} */
 :root {
   --green: #58db8f;
   --lightGreen: #e7f4e9;
@@ -37,7 +41,7 @@ body {
   width: 100vw;
   height: 100vh;
 
-  border: 1px solid blue;
+  border: 1px solid var(--green);
 }
 
 h1,
