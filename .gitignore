@@ -1,1 +1,5 @@
+# ENVIRONMENTS
 backend/.venv/**/*
+backend/.idea/**/*
+backend/__psyche__/**/*
+.env

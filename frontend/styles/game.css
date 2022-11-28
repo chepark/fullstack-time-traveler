@@ -29,3 +29,6 @@
 }
 
 /* INTERACTIVE MAP */
+#map {
+  height: 100%;
+}
