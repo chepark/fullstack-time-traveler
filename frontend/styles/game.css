@@ -28,17 +28,4 @@
   border: 1px solid salmon;
 }
 
-.wrapper {
-  height: 100px;
-}
-
-.wrapper.instruction {
-  height: 200px;
-}
-
-/* STYPES RELATED TO THE RIGHT PANEL */
-
-/* DO NOT REMOVE THE STYLE */
-.timezone-map.inactive {
-  display: none;
-}
+/* INTERACTIVE MAP */
