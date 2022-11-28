@@ -46,4 +46,9 @@ def play_game():
 while user.co2_budget > 0: 
     play_game()
 
+# WHAT WE NEED TO CONSIDER
+# 1. DB - TABLES, 
+# 2. CLASS DESIGN, 
+# 3. ROUTE DESIGN,
+# 4. REFACTORING _MAIN.PY  
     

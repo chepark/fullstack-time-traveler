@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "question": "How many time zones around the world?",
+    "options": [24, 12, 10, 0],
+    "answer": 24
+  }
+]

@@ -15,6 +15,7 @@ AND MAKE YOUR OWN */
   border: 1px solid black;
 }
 
+/* STYLES RELATED TO INTERACTIVE MAP */
 .map {
   width: 70vw;
 }
@@ -30,6 +31,8 @@ AND MAKE YOUR OWN */
 .wrapper.instruction {
   height: 200px;
 }
+
+/* STYPES RELATED TO THE RIGHT PANEL */
 
 /* DO NOT REMOVE THE STYLE */
 .timezone-map.inactive {
