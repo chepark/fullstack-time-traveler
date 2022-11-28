@@ -2,6 +2,6 @@
 @import "./quiz.css";
 @import "./game.css";
 
-#home {
+#game {
   max-width: 1200px;
 }
