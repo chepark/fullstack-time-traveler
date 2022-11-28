@@ -2,26 +2,36 @@
 
 #game {
   max-width: 1200px;
+  height: 75vh;
   margin: auto;
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
-/* IT IS OKAY TO REMOVE CSS BELOW
-AND MAKE YOUR OWN */
 .panel-left,
 .panel-right {
   border: 1px solid black;
 }
 
-/* STYLES RELATED TO INTERACTIVE MAP */
-.map {
-  width: 70vw;
+.panel-left {
+  width: 60vw;
+}
+
+.panel-right {
+  width: 25vw;
+  display: grid;
+  grid-template-rows: 1fr 1fr 2fr;
 }
 
 .panel-right > * {
   border: 1px solid salmon;
+}
+
+.indicator {
+}
+
+.guide {
 }
 
 .wrapper {
