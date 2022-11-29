@@ -8,7 +8,8 @@ import mysql.connector
 from dotenv import load_dotenv
 import config
 
-from game import Game  
+from game import Game
+from user import User
 
 load_dotenv()
 
@@ -37,22 +38,25 @@ def getUser():
 #http://127.0.0.1:5000/airport/all
 @app.route('/airport/all')
 def getAllAirports():
-    sql = "SELECT * FROM airport WHERE type='large_airport'"
+    sql = "SELECT ident, name, iso_country, latitude_deg, longitude_deg FROM airport WHERE type='large_airport'"
     cursor = config.connection.cursor()
     cursor.execute(sql)
-    result = cursor.fetchall()
+    results = cursor.fetchall()
+    data = []
 
-    game= Game()
-    print(vars(game))
-  
+    for x in results:
+        airport = {"ident": x[0], "name": x[1], "iso_country":x[2], "latitude": x[3], "longitude": x[4]}
+        data.append(airport)
+
     if cursor.rowcount > 0: 
-       response = {"data": result, "status": 200}
+       response = {"data": data, "status": 200}
        return response
 
 #http://127.0.0.1:5000/newgame 
 @app.route('/newgame ')
 def createGame():
     game = Game()
+    
 
 #http://127.0.0.1:5000/game?id=game1?benefit=20
 @app.route('/game/')

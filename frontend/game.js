@@ -1,5 +1,3 @@
-const mapDisplay = document.getElementById("map");
-
 // Init the map
 const map = L.map("map", { tap: false });
 
@@ -12,4 +10,8 @@ export const displayMap = () => {
   map.setView([60, 24], 7);
 };
 
-const marker = L.marker([51.5, -0.09]).addTo(map);
+export const addMapMarkers = (airports) => {
+  airports.map((airport) => {
+    return L.marker([airport.latitude, airport.longitude]).addTo(map);
+  });
+};

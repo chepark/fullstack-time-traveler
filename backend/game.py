@@ -68,14 +68,19 @@ class Game:
     def generate_goal(self):
         # 15 degrees of longitude = 1 hour difference
         longitude_degree = 15
-    
-        random_hour_gap = random.randrange(-5,5,1)
-        random_longitude = self.current_location['longitude'] + (longitude_degree * random_hour_gap)
 
-        time_result = self.get_time(self.current_location['latitude'], random_longitude)
-        self.goal_time['time'] = time_result[0]
-        self.goal_time['hour'] = time_result[1]
+        no_goal = True
+        
+        while no_goal: 
+            random_hour_gap = random.randrange(-5,5,1)
+            random_longitude = self.current_location['longitude'] + (longitude_degree * random_hour_gap)
 
+            time_result = self.get_time(self.current_location['latitude'], random_longitude)
+            self.goal_time['time'] = time_result[0]
+            self.goal_time['hour'] = time_result[1]
+
+            if 0 <= random_longitude <= 360:
+                no_goal = False
 
     def calculate_co2(self): 
         co2_consumed_per_km = 0.115

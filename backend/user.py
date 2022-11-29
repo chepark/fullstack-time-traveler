@@ -1,5 +1,3 @@
-
-
 class User: 
     total_user = 0
 

@@ -8,8 +8,9 @@ export const fetchUser = (username) => {};
 export const fetchAllAirports = async () => {
   const url = BASE_URL + "/airport/all";
   const response = await fetch(url);
-  const data = await response.json();
-  console.log(data);
+  const { data } = await response.json();
+
+  return data;
 };
 
 export const createNewGame = () => {};
