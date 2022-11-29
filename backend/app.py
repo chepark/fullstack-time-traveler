@@ -6,12 +6,13 @@ from flask import Flask, request, Response
 from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
+import config
 
-from models import User, Game  
+from game import Game  
 
 load_dotenv()
 
-connection = mysql.connector.connect(
+config.connection = mysql.connector.connect(
          host=os.environ.get('HOST'),
          port= 3306,
          database=os.environ.get('DB_NAME'),
@@ -37,10 +38,13 @@ def getUser():
 @app.route('/airport/all')
 def getAllAirports():
     sql = "SELECT * FROM airport WHERE type='large_airport'"
-    cursor = connection.cursor()
+    cursor = config.connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
 
+    game= Game()
+    print(vars(game))
+  
     if cursor.rowcount > 0: 
        response = {"data": result, "status": 200}
        return response
@@ -57,8 +61,8 @@ def getGame():
     game_id = args.get('id')
     co2_benefit = args.get('benefit')
 
-
-
-
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=5000)
+
+
+
