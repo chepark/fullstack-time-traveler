@@ -7,3 +7,5 @@ class User:
         self.game = [game.id]
         self.goal_reached = {'highest': None, 'current': None}
         total_user = total_user + 1
+    
+    

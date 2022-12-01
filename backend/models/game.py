@@ -11,12 +11,13 @@ import random
 class Game:
     total_game = 0
 
-    def __init__(self):
-        self.id = 'game'+ str(Game.total_game)
-        
+    def __init__(self, userId, co2benefit):
+        self.gameId = 'game'+ str(Game.total_game)
+        self.userId = userId
+
         self.co2_consumed = 0
         self.co2_budget = config.default_co2
-        self.co2_benefit = 0
+        self.co2_benefit = co2benefit
 
         self.current_location = {'name': config.default_airport, 'longitude': None, 'latitude': None}
         self.get_coordinate(self.current_location['name'])
@@ -33,6 +34,10 @@ class Game:
         self.game_over = False
         self.total_try = 0
         self.won = 0
+        #if total_try = 0
+        # set default airport 
+        # if total_try > 0
+        # start from current location 
         
     
     def get_coordinate(self, airport_name):
@@ -79,8 +84,9 @@ class Game:
             self.goal_time['time'] = time_result[0]
             self.goal_time['hour'] = time_result[1]
 
-            if 0 <= random_longitude <= 360:
+            if -180.0 <= random_longitude <= 180.0:
                 no_goal = False
+
 
     def calculate_co2(self): 
         co2_consumed_per_km = 0.115
