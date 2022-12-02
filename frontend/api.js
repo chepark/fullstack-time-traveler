@@ -3,10 +3,6 @@
 // all api requests
 const BASE_URL = "http://127.0.0.1:5000";
 
-export const getUser = () => {
-  const uerURL = "";
-};
-
 export const fetchAllAirports = async () => {
   const allAirportsURL = `${BASE_URL}/airport/all`;
 
@@ -14,6 +10,10 @@ export const fetchAllAirports = async () => {
   const { data } = await response.json();
 
   return data;
+};
+
+export const getUser = () => {
+  const uerURL = "";
 };
 
 export const fetchNewGame = async () => {

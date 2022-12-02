@@ -120,7 +120,7 @@ def drawResult():
 
 
 
-#URL: http://127.0.0.1:5000/newgoal/userid=user112?gameId=game292?current_loc=helsinki%airport
+#URL: http://127.0.0.1:5000/newgoal?userid=user112?gameid=game292?current_loc=helsinki%airport
 # Arguments: userid, gameid, current_loc
 # TRIGGERED WHEN ...
 # user clicks Play Next button or Try Again button after getting results.
