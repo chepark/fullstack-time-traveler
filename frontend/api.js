@@ -12,18 +12,26 @@ export const fetchAllAirports = async () => {
   return data;
 };
 
+// DIEP
+// It fetches user data from backend
 export const getUser = () => {
   const uerURL = "";
 };
 
+// DIEP
+//It fetches new game from backend
 export const fetchNewGame = async () => {
   const newGameURL = "";
 };
 
+// ANNA
+//It fetches result from backend
 export const getResult = async () => {
   const resultURL = "";
 };
 
+// MAMITA
+//It fetches new goal from backend
 export const fetchNewGoal = async (userid, gameid, current_loc) => {
   const newGoalURL = `${BASE_URL}/newgoal?userid=${userid}?gameid=${gameid}?current_loc=${current_loc}`;
   const response = await fetch(newGoalURL);

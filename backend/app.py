@@ -64,6 +64,7 @@ def getAllAirports():
  
 
 
+# DIEP
 # URL: http://127.0.0.1:5000/user?name=sophie
 # TRIGGERED WHEN...
 # 1. user clicks the submit button after typing her name on the header.
@@ -73,7 +74,7 @@ def getUser():
     args = request.args
     name = args.get("name")
     # TODO:
-    # Find the user with the name.
+    # Find the user with the name in the database SQL.
     # 1-1 user exists? -> fetch the existing user data from SQL
     # 1-2 NO user? -> create a new user with class 
     # insert new user data in SQL.
@@ -83,6 +84,7 @@ def getUser():
 
 
 
+# DIEP
 # URL: http://127.0.0.1:5000/newgame?userid=user112?co2benefit=20
 # Arguments: userid, co2benefit
 # TRIGGERED WHEN...
@@ -95,17 +97,19 @@ def getUser():
 def createGame():
     print('handle new game data')
     # TODO:
+    # 0. 
     # 1. create a new game data with userId, and co2benefit
     # 2. UPDATE co2benefit: check co2benefit argument in URL
     # 2-1. if co2benefit is greater than 0 
     # -> update co2benefit value in the game data.
     # 2-2. if co2benefit is 0
     # -> do nothing
-    # 3. send response (current location, co2budget, goaltime)    
+    # 3. send response (current location, co2budget, goaltime)
+    #** There is a chance that some data are missing. 
 
 
 
-
+# ANNA
 #URL: http://127.0.0.1:5000/getresult/gameId=game292?airport_name=helsinki%airport
 # Arguments: gameid, airport_name
 # TRIGGERED WHEN...
@@ -122,6 +126,7 @@ def drawResult():
 
 
 
+# MAMITA
 #URL: http://127.0.0.1:5000/newgoal?userid=user112?gameid=game292?current_loc=helsinki%airport
 # Arguments: userid, gameid, current_loc
 # TRIGGERED WHEN ...

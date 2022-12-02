@@ -8,3 +8,6 @@ window.addEventListener("load", async () => {
   addMapMarkers(airports);
   console.log(airports);
 });
+
+// Version2: Add functionality to check if the user already exist
+// by adding message alert. ex) Is that you, (name)?
