@@ -1,6 +1,6 @@
 # Time Traveler
 
-## How to run the project
+## How to run locally
 
 ### 1. Prerequisite to run the project
 

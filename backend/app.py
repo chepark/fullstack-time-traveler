@@ -93,6 +93,7 @@ def getUser():
 # if user x takes a quiz -> co2benefit will be set as 0 by default.
 @app.route('/newgame', defaults={'co2benefit':0})
 def createGame():
+    print('handle new game data')
     # TODO:
     # 1. create a new game data with userId, and co2benefit
     # 2. UPDATE co2benefit: check co2benefit argument in URL
@@ -112,6 +113,7 @@ def createGame():
 
 @app.route('/result') 
 def drawResult():
+    print('game result')
     # TODO:
     # calculate co2budget (game.calculate_co2)
     # check success or failure
@@ -127,6 +129,7 @@ def drawResult():
 
 @app.route('/newgoal')
 def generateNewGoal():
+    print('new goal')
     # TODO:
     # create new goal with game.generate_goal
     # create new goal data in SQL
