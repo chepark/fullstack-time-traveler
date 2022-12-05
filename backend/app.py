@@ -50,9 +50,6 @@ def getAllAirports():
     results = cursor.fetchall()
     data = []
 
-    goal = Goal()
-    goal.getTimeZoneName(38.9, -77.03)
-
     for x in results:
         airport = {"ident": x[0], "name": x[1], "iso_country":x[2], "latitude": x[3], "longitude": x[4]}
         data.append(airport)
@@ -117,7 +114,19 @@ def createGame():
 
 @app.route('/result') 
 def drawResult():
-    print('game result')
+    # ! anna: example
+    new_location_name = request.args('airport_name')
+    goal = Goal(game)
+    game = Game(goal)
+    game.get_coordinate(new_location_name, 'new')
+    game.calculate_co2()
+
+    #Compare hours in the Goal class (goal_hour)
+    # 1. Get the current location time
+    game.get_time(game.current_location['latitude'], game.current_location['longitude'])
+    # 2. Compare with goal time
+    
+
     # TODO:
     # calculate co2budget (game.calculate_co2)
     # check success or failure
@@ -137,7 +146,9 @@ def generateNewGoal():
     print('new goal')
     # TODO:
     # create new goal with game.generate_goal
+
     # create new goal data in SQL
+
     # send response (new goal)
 
 
