@@ -6,12 +6,12 @@ import config
 import requests
 from datetime import datetime
 from geopy.distance import geodesic as GD
-import random
+
 
 class Game:
     total_game = 0
 
-    def __init__(self, userId, co2benefit):
+    def __init__(self, userId, co2benefit, goal):
         self.gameId = 'game'+ str(Game.total_game)
         self.userId = userId
 
@@ -20,7 +20,8 @@ class Game:
         self.co2_benefit = co2benefit
 
         self.current_location = {'name': config.default_airport, 'longitude': None, 'latitude': None}
-        self.get_coordinate(self.current_location['name'])
+        self.get_coordinate(self.current_location['name'], 'current')
+
         self.new_location={"name": None, 'longitude': None, 'latitude': None}
         
         self.current_time = {"time": None, "hour": None}
@@ -28,19 +29,16 @@ class Game:
         self.current_time['time'] = current_time_result[0]
         self.current_time['hour'] = current_time_result[1]
 
-        self.goal_time = {"time": None, "hour": None}
-        self.generate_goal()
+        # ! Moved to the Goal Class
+        # self.goal_time = goal.time
+        # self.generate_goal()
 
         self.game_over = False
         self.total_try = 0
         self.won = 0
-        #if total_try = 0
-        # set default airport 
-        # if total_try > 0
-        # start from current location 
-        
+   
     
-    def get_coordinate(self, airport_name):
+    def get_coordinate(self, airport_name, target):
         sql = "SELECT name, latitude_deg, longitude_deg FROM Airport"
         sql += " WHERE name ='" + airport_name + "'"
 
@@ -53,8 +51,17 @@ class Game:
                 latitude =  round(row[1], 2)
                 longitude = round(row[2], 2)
 
-                self.current_location['longitude'] = longitude
-                self.current_location['latitude'] = latitude
+                if target == "new": 
+                    self.new_location['longitude'] = longitude
+                    self.new_location['latitude'] = latitude
+                    print(self.new_location)
+
+                elif target == "current":
+                    self.current_location['longitude'] = longitude
+                    self.current_location['latitude'] = latitude
+                    print(self.current_location)
+
+
 
 
     def get_time(self, airport_latitude, airport_longitude):
@@ -64,28 +71,27 @@ class Game:
         min = (response["minute"])
         time = datetime.strptime(f"{hour}:{min}:00", "%H:%M:%S")
         time = time.time().strftime("%H:%M")
-        #! REMOVE PRINT LATER
-        print(f"The time of the current airport is {time}")
 
         return time, hour
 
+    # ! generate_goal has been moved to goal.py
+    # def generate_goal(self):
+    #     # 15 degrees of longitude = 1 hour difference
+    #     longitude_degree = 15
 
-    def generate_goal(self):
-        # 15 degrees of longitude = 1 hour difference
-        longitude_degree = 15
-
-        no_goal = True
+    #     no_goal = True
         
-        while no_goal: 
-            random_hour_gap = random.randrange(-5,5,1)
-            random_longitude = self.current_location['longitude'] + (longitude_degree * random_hour_gap)
+    #     while no_goal: 
+    #         random_hour_gap = random.randrange(-5,5,1)
+    #         random_longitude = self.current_location['longitude'] + (longitude_degree * random_hour_gap)
 
-            time_result = self.get_time(self.current_location['latitude'], random_longitude)
-            self.goal_time['time'] = time_result[0]
-            self.goal_time['hour'] = time_result[1]
+    #         time_result = self.get_time(self.current_location['latitude'], random_longitude)
+    #         self.goal_time['time'] = time_result[0]
+    #         self.goal_time['hour'] = time_result[1]
 
-            if -180.0 <= random_longitude <= 180.0:
-                no_goal = False
+    #         if -180.0 <= random_longitude <= 180.0:
+    #             no_goal = False
+
 
 
     def calculate_co2(self): 
@@ -107,11 +113,9 @@ class Game:
         if self.co2_budget < 0:
             self.game_over = True
         
-            # UPDATE current_airport AFTER EACH FLIGHT
-            self.current_airport = self.new_location
+        # UPDATE current_airport AFTER EACH FLIGHT
+        self.current_airport = self.new_location
 
-            # RESET chosen_airport
-            self.new_location = {"name": None, 'longitude': None, 'latitude': None}
+        # RESET chosen_airport
+        self.new_location = {"name": None, 'longitude': None, 'latitude': None}
     
-    
-        
