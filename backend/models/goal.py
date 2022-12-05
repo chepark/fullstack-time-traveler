@@ -23,7 +23,6 @@ class Goal:
         self.timezone = timezone_name
     
     def generate_goal(self, current_longitude, current_latitude):
-        # 15 degrees of longitude = 1 hour difference
         longitude_degree = 15
 
         no_goal = True
