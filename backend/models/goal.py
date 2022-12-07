@@ -21,11 +21,12 @@ class Goal:
 
         timezone_name = data['timeZone']
         self.timezone = timezone_name
+
     
     def generate_goal(self, current_longitude, current_latitude):
         longitude_degree = 15
 
-        no_goal = True
+        no_goal = True 
         
         while no_goal: 
             random_hour_gap = random.randrange(-5,5,1)

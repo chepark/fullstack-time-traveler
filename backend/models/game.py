@@ -11,7 +11,7 @@ from geopy.distance import geodesic as GD
 class Game:
     total_game = 0
 
-    def __init__(self, userId, co2benefit, goal):
+    def __init__(self, userId, co2benefit):
         self.gameId = 'game'+ str(Game.total_game)
         self.userId = userId
 
@@ -123,7 +123,7 @@ class Game:
             self.game_over = True
         
         # UPDATE current_airport AFTER EACH FLIGHT
-        self.current_airport = self.new_location
+        self.current_location = self.new_location
 
         # RESET chosen_airport
         self.new_location = {"name": None, 'longitude': None, 'latitude': None}

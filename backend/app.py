@@ -136,20 +136,27 @@ def drawResult():
 
 
 # MAMITA
-#URL: http://127.0.0.1:5000/newgoal?userid=user112?gameid=game292?current_loc=helsinki%airport
+#URL: http://127.0.0.1:5000/newgoal?gameid=game292?current_loc=helsinki%airport
 # Arguments: userid, gameid, current_loc
 # TRIGGERED WHEN ...
 # user clicks Play Next button or Try Again button after getting results.
 
 @app.route('/newgoal')
-def generateNewGoal():
-    print('new goal')
-    # TODO:
-    # create new goal with game.generate_goal
+def generate_newgoal():
+    args = request.args
+    gameId = args.get('gameid')
+    #1. get the longitude, latitude from game class
+    #1.1 for testing purpose, create game instance
+    game = Game()
 
-    # create new goal data in SQL
+    #2. create goal instance
+    goal = Goal()
+    # use generate_goal
+    goal.generate_goal(longitude, latitude)
 
-    # send response (new goal)
+    data = {"new_goal": goal.time, "status": 200}
+    response = {'data': data, 'status': 200}
+    return response
 
 
 
