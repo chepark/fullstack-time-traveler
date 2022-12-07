@@ -98,9 +98,7 @@ ul {
 
 .close_button {
   border: none;
-  background: #27ba35;
-  position: absolute;
-  top: 0.1rem;
+  background: #27ba35;  top: 0.1rem;
   right: 0.1rem;
   align-items: center;
   cursor: pointer;
@@ -112,7 +110,7 @@ ul {
   margin: 0.3rem;
   color: #1f1f1f;
   background: #ffffff;
-  position: relative;
+  position: absolute !important;
 }
 
 .timezonemap_picture{
