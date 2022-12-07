@@ -106,8 +106,8 @@ def createGame():
 # 1. user selects a new airport
 
 @app.route('/result')
-def draw_result():  # function name should be lowercase
-    # ! anna: example
+def draw_result():  
+
     goal = Goal()  # temporary
     game = Game("name", 5000)  # temporary
     # args = request.args
@@ -121,22 +121,13 @@ def draw_result():  # function name should be lowercase
     print(f"current location is {game.current_location}")
 
     # (correct time zone or not)
-    goal.is_goal_reached()  # checks if the time in current_location the same as in goal time
+    goal.is_goal_reached(game)  # checks if the time in current_location the same as in goal time
     success = goal.is_reached
     game_over = game.game_over
 
     data = {"co2budget": game.co2_budget, 'success': success, 'game_over': game_over}
     response = {"data": data, "status": 200}
     return response
-
-    # Compare hours in the Goal class (goal_hour)
-    # 1. Get the current location time
-    # 2. Compare with goal time
-
-    # TODO:
-    # calculate co2budget (game.calculate_co2)
-    # check success or failure
-    # send response (co2budget, game result, game over)
 
 
 # MAMITA

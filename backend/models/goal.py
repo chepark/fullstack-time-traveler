@@ -1,7 +1,5 @@
 import requests
 import random
-import game
-
 
 class Goal:
     total_goals = 0
@@ -39,7 +37,7 @@ class Goal:
                 no_goal = False
 
     # checks if the goal time is reached and updates is_reached in goal.py
-    def is_goal_reached(self):
+    def is_goal_reached(self, game):
         if self.time == game.get_time(game.current_location['latitude'], game.current_location['longitude']):
             self.is_reached = True
         else:
