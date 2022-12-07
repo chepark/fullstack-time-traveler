@@ -86,8 +86,9 @@ ul {
 .map_hide{
   position: absolute;
   z-index: 1000;
-  width: 50%;
-  height: 50%;
+  display: flex;
+  width: 60%;
+  height: 60%;
   top: 10%;
   border-radius: 20px;
   border: none;
@@ -96,27 +97,46 @@ ul {
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
-.close_button {
-  border: none;
-  background: #27ba35;  top: 0.1rem;
-  right: 0.1rem;
-  align-items: center;
-  cursor: pointer;
-}
 .close {
-  font-size: 40px;
-  font-weight: 300;
-  padding: 0.3rem;
-  margin: 0.3rem;
-  color: #1f1f1f;
-  background: #ffffff;
-  position: absolute !important;
+  position: absolute;
+  right: 17px;
+  top: 2px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
 }
-
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+.map_container{
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem;
+  margin: 0.2rem;
+}
 .timezonemap_picture{
   max-width: 100%;
   max-height: 100%;
+  box-sizing: border-box;
   object-fit: contain;
-  padding: 0.1rem;
-  border: thick #1f1f1f;
+  display: block;
+  margin: auto;
+  object-position: center;
+  padding: 0.3rem;
+  border: thin solid #303030;
+
 }

@@ -147,9 +147,23 @@ def draw_result():  # function name should be lowercase
 
 @app.route('/newgoal')
 def generate_new_goal():
-    print('new goal')
-    # TODO:
-    # create new goal with game.generate_goal
+    game = Game("name", "current_loc")
+    goal = Goal()
+    current_loc = {"name", 'longitude', 'latitude'}
+    game.get_coordinate = current_loc['name']
+    current_loc = {"Helsinki Airport", "", ""}
+
+    args = request.args
+    gameid = args.get("gameid")
+    current_loc = args.get("current_loc")
+    goal.get_time(goal.current_loc['latitude'], goal.current_loc['longitude'])
+
+    data = {"time": goal.time}
+    response = {"data": data, "status": 200}
+    return response
+
+
+# create new goal with game.generate_goal
 
     # create new goal data in SQL
 
