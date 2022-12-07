@@ -1,6 +1,5 @@
-# ENVIRONMENTS
+
 .venv/**/*
 .idea/**/*
-__psyche__/**/*
 .env
-
+__pycache__/**/*

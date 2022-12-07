@@ -32,22 +32,37 @@
             </div>
             <div class="panel panel-right">
                 <!-- CO2 BUDGET -->
-                <div class="indicator indicator-co2">
+                 <div class="indicator indicator-co2">
+                    <h3>Budget</h3>
+                    <div class="full_budget_container">
+                        <div class="co2-container"></div>
+                    </div>
                 </div>
                 <!-- TIME -->
-                <div class="indicator indicator-time">
-                    <div class="time time-current"></div>
-                    <div class="time time-goal"></div>
-                </div>
+                <ul class="indicator indicator-time">
+                    <li class="time time-current">
+                        <h3>Current time</h3>
+                    </li>
+                    <li class="time time-goal">
+                        <h3>Goal time</h3>
+                    </li>
+                </ul>
                 <!-- GUIDE -->
                 <div class="guide">
+                    <h3>Guide</h3>
+                    <div class="guide_messages">
+                        <p>Time traveler:</p>
+                    </div>
 
                 </div>
             </div>
         </main>
         <!-- 3. TIMEZONE MAP -->
-        <dialog>
-
+        <dialog open class="map_hide">
+            <div class="close_button"><input  type="button">
+            <p class="close">&times;</p>
+            </div>
+            <img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture" alt="timezone map">
         </dialog>
         <!-- 4. QUIZ -->
         <dialog>
