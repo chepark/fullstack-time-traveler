@@ -1,4 +1,3 @@
-
 import json
 import os
 
@@ -6,7 +5,7 @@ from flask import Flask, request, Response
 from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
- 
+
 import config
 from models.game import Game
 from models.user import User
@@ -21,13 +20,13 @@ load_dotenv()
 # CONNECT TO DB
 # os.envinron.get brings variables from .env file.
 config.connection = mysql.connector.connect(
-         host=os.environ.get('HOST'),
-         port= 3306,
-         database=os.environ.get('DB_NAME'),
-         user=os.environ.get('DB_USER'),
-         password=os.environ.get('DB_PASS'),
-         autocommit=True
-         )
+    host=os.environ.get('HOST'),
+    port=3306,
+    database=os.environ.get('DB_NAME'),
+    user=os.environ.get('DB_USER'),
+    password=os.environ.get('DB_PASS'),
+    autocommit=True
+)
 
 app = Flask(__name__)
 
@@ -51,14 +50,12 @@ def getAllAirports():
     data = []
 
     for x in results:
-        airport = {"ident": x[0], "name": x[1], "iso_country":x[2], "latitude": x[3], "longitude": x[4]}
+        airport = {"ident": x[0], "name": x[1], "iso_country": x[2], "latitude": x[3], "longitude": x[4]}
         data.append(airport)
 
-    if cursor.rowcount > 0: 
-       response = {"data": data, "status": 200}
-       return response
- 
- 
+    if cursor.rowcount > 0:
+        response = {"data": data, "status": 200}
+        return response
 
 
 # DIEP
@@ -78,9 +75,6 @@ def getUser():
     # 2. send response(userdata, status: 200).
 
 
-
-
-
 # DIEP
 # URL: http://127.0.0.1:5000/newgame?userid=user112?co2benefit=20
 # Arguments: userid, co2benefit
@@ -90,7 +84,7 @@ def getUser():
 # 2. user clicks 'Start Game' button after finishing quiz 
 
 # if user x takes a quiz -> co2benefit will be set as 0 by default.
-@app.route('/newgame', defaults={'co2benefit':0})
+@app.route('/newgame', defaults={'co2benefit': 0})
 def createGame():
     print('handle new game data')
     # TODO:
@@ -102,47 +96,57 @@ def createGame():
     # 2-2. if co2benefit is 0
     # -> do nothing
     # 3. send response (current location, co2budget, goaltime)
-    #** There is a chance that some data are missing. 
-
+    # ** There is a chance that some data are missing.
 
 
 # ANNA
-#URL: http://127.0.0.1:5000/getresult/gameId=game292?airport_name=helsinki%airport
+# URL: http://127.0.0.1:5000/result?gameId=game292?airport_name=Dublin%Airport
 # Arguments: gameid, airport_name
 # TRIGGERED WHEN...
 # 1. user selects a new airport
 
-@app.route('/result') 
-def drawResult():
+@app.route('/result')
+def draw_result():  # function name should be lowercase
     # ! anna: example
-    new_location_name = request.args('airport_name')
-    goal = Goal(game)
-    game = Game(goal)
-    game.get_coordinate(new_location_name, 'new')
-    game.calculate_co2()
+    goal = Goal()  # temporary
+    game = Game("name", 5000)  # temporary
+    # args = request.args
+    # new_location_name = args.get("airport_name")
+    new_location_name = "Dublin Airport"  # temporary
 
-    #Compare hours in the Goal class (goal_hour)
+    game.get_coordinate(new_location_name, 'new')
+    print(f"Coordinates are taken. New location is: {game.new_location}")
+    game.calculate_co2()
+    print(f"CO2 calculated. CO2 budget: {game.co2_budget}")
+    print(f"current location is {game.current_location}")
+
+    # (correct time zone or not)
+    goal.is_goal_reached()  # checks if the time in current_location the same as in goal time
+    success = goal.is_reached
+    game_over = game.game_over
+
+    data = {"co2budget": game.co2_budget, 'success': success, 'game_over': game_over}
+    response = {"data": data, "status": 200}
+    return response
+
+    # Compare hours in the Goal class (goal_hour)
     # 1. Get the current location time
-    game.get_time(game.current_location['latitude'], game.current_location['longitude'])
     # 2. Compare with goal time
-    
 
     # TODO:
     # calculate co2budget (game.calculate_co2)
     # check success or failure
-    # creaet reached_goal data in SQL depending on success or failure
     # send response (co2budget, game result, game over)
 
 
-
 # MAMITA
-#URL: http://127.0.0.1:5000/newgoal?userid=user112?gameid=game292?current_loc=helsinki%airport
+# URL: http://127.0.0.1:5000/newgoal?userid=user112?gameid=game292?current_loc=helsinki%airport
 # Arguments: userid, gameid, current_loc
 # TRIGGERED WHEN ...
 # user clicks Play Next button or Try Again button after getting results.
 
 @app.route('/newgoal')
-def generateNewGoal():
+def generate_new_goal():
     print('new goal')
     # TODO:
     # create new goal with game.generate_goal
@@ -150,12 +154,10 @@ def generateNewGoal():
     # create new goal data in SQL
 
     # send response (new goal)
-
-
+    # data = {"time": goal.time}
+    # response = {"data": data, "status": 200}
+    # return response
 
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=5000)
-
-
-

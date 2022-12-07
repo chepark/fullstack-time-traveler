@@ -9,11 +9,6 @@
   gap: 1rem;
 }
 
-.panel-left,
-.panel-right {
-  border: 1px solid black;
-}
-
 .panel-left {
   width: 60vw;
 }
@@ -24,11 +19,106 @@
   grid-template-rows: 1fr 1fr 2fr;
 }
 
-.panel-right > * {
-  border: 1px solid salmon;
-}
-
 /* INTERACTIVE MAP */
 #map {
   height: 100%;
+}
+
+.indicator-co2 {
+  margin: 0.3rem;
+  padding: 0.3rem;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+.full_budget_container{
+  background-color: var(--lightGreen);
+  border-radius:16px;
+}
+.co2-container{
+  padding:0.01em 16px;
+  background-color:var(--green);
+  border-radius:16px;
+  width: 50%;
+  height: 20px;
+}
+/* TIME */
+.indicator-time {
+  display: flex;
+  flex-wrap: wrap;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+.panel-right {
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+.indicator-time li {
+  width: calc(50% - 0.6rem);
+  text-align: center;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.3rem;
+  margin: 0.3rem;
+  background: #ffffff;
+  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+.time-goal{
+  color: var(--green);
+}
+.guide {
+  text-align: left;
+  padding: 0.3rem;
+  margin: 0.3rem;
+  background: #ffffff;
+  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+}
+.guide_messages{
+  text-align: left;
+}
+/* 3. TIMEZONE MAP */
+.map_hide{
+  position: absolute;
+  z-index: 1000;
+  width: 50%;
+  height: 50%;
+  top: 10%;
+  border-radius: 20px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.close_button {
+  border: none;
+  background: #27ba35;
+  position: absolute;
+  top: 0.1rem;
+  right: 0.1rem;
+  align-items: center;
+  cursor: pointer;
+}
+.close {
+  font-size: 40px;
+  font-weight: 300;
+  padding: 0.3rem;
+  margin: 0.3rem;
+  color: #1f1f1f;
+  background: #ffffff;
+  position: relative;
+}
+
+.timezonemap_picture{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  padding: 0.1rem;
+  border: thick #1f1f1f;
 }
