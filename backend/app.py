@@ -106,8 +106,8 @@ def createGame():
 # 1. user selects a new airport
 
 @app.route('/result')
-def draw_result():  # function name should be lowercase
-    # ! anna: example
+def draw_result():  
+
     goal = Goal()  # temporary
     game = Game("name", 5000)  # temporary
     # args = request.args
@@ -121,22 +121,13 @@ def draw_result():  # function name should be lowercase
     print(f"current location is {game.current_location}")
 
     # (correct time zone or not)
-    goal.is_goal_reached()  # checks if the time in current_location the same as in goal time
+    goal.is_goal_reached(game)  # checks if the time in current_location the same as in goal time
     success = goal.is_reached
     game_over = game.game_over
 
     data = {"co2budget": game.co2_budget, 'success': success, 'game_over': game_over}
     response = {"data": data, "status": 200}
     return response
-
-    # Compare hours in the Goal class (goal_hour)
-    # 1. Get the current location time
-    # 2. Compare with goal time
-
-    # TODO:
-    # calculate co2budget (game.calculate_co2)
-    # check success or failure
-    # send response (co2budget, game result, game over)
 
 
 # MAMITA
@@ -146,6 +137,7 @@ def draw_result():  # function name should be lowercase
 # user clicks Play Next button or Try Again button after getting results.
 
 @app.route('/newgoal')
+<<<<<<< HEAD
 def generate_new_goal():
     game = Game("name", "current_loc")
     goal = Goal()
@@ -164,13 +156,25 @@ def generate_new_goal():
 
 
 # create new goal with game.generate_goal
+=======
+def generate_newgoal():
+    args = request.args
+    gameId = args.get('gameid')
+    #1. get the longitude, latitude from game class
+    #1.1 for testing purpose, create game instance
+    game = Game()
 
-    # create new goal data in SQL
+    #2. create goal instance
+    goal = Goal()
+    # use generate_goal
+    goal.generate_goal(longitude, latitude)
 
-    # send response (new goal)
-    # data = {"time": goal.time}
-    # response = {"data": data, "status": 200}
-    # return response
+    data = {"new_goal": goal.time, "status": 200}
+    response = {'data': data, 'status': 200}
+    return response
+>>>>>>> d152716c096ce21ac36fe85e067d524e4e4d75f4
+
+
 
 
 if __name__ == '__main__':
