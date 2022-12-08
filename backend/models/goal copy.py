@@ -1,8 +1,7 @@
 import requests
 import random
-from models.game import Game
 
-class Goal(Game):
+class Goal():
     def __init__(self):
         # remove gameId
         # self.gameId = 'goal' + str(Goal.total_goals)
@@ -20,7 +19,7 @@ class Goal(Game):
         timezone_name = data['timeZone']
         self.timezone = timezone_name
 
-    def generate_goal(self, current_longitude, current_latitude):
+    def generate_goal(self, game, current_longitude, current_latitude):
         longitude_degree = 15
 
         no_goal = True
@@ -29,7 +28,7 @@ class Goal(Game):
             random_hour_gap = random.randrange(-5, 5, 1)
             random_longitude = current_longitude + (longitude_degree * random_hour_gap)
 
-            time_result = super().get_time(current_latitude, random_longitude)
+            time_result = game.get_time(current_latitude, random_longitude)
             self.time = time_result[0]
             self.hour = time_result[1]
 
@@ -37,8 +36,8 @@ class Goal(Game):
                 no_goal = False
 
     # checks if the goal time is reached and updates is_reached in goal.py
-    def is_goal_reached(self, latitude, longitude):
-        if self.time == super().get_time(latitude, longitude):
+    def is_goal_reached(self, game):
+        if self.time == game.get_time(game.current_location['latitude'], game.current_location['longitude']):
             self.is_reached = True
         else:
             self.is_reached = False
