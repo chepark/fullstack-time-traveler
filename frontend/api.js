@@ -14,20 +14,24 @@ export const fetchAllAirports = async () => {
 
 // DIEP
 // It fetches user data from backend
-export const getUser = () => {
-  const uerURL = "";
+export const getUser = async(name) => {
+  const userURL = `${BASE_URL}/user/name`;
+  const response = await fetch(userURL);
 };
 
 // DIEP
 //It fetches new game from backend
 export const fetchNewGame = async () => {
-  const newGameURL = "";
+  const newGameURL = `${BASE_URL}/newgame`;
+  const response = await fetch(newGameURL);
 };
 
-// ANNA
-//It fetches result from backend
-export const getResult = async () => {
-  const resultURL = "";
+export const getResult = async (gameId, airportName) => {
+  const resultURL = `${BASE_URL}/result?gameId=${gameId}?airport_name=${airportName}`;
+  // const resultURL = `${BASE_URL}/result?gameId=game292?airport_name=Dublin%Airport`;
+  const response = await fetch(resultURL);
+  const { data } = await response.json();
+  return data;
 };
 
 // MAMITA
