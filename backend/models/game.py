@@ -30,8 +30,8 @@ class Game:
         self.current_time['time'] = current_time_result[0]
         self.current_time['hour'] = current_time_result[1]
 
-        # ? issue: related to Goal rather than Game 
-        # ! solution: moved to goal class. 
+        # ? issue: related to Goal rather than Game
+        # ! solution: moved to goal class.
 
         # self.goal_time = goal.time
         # self.generate_goal()
@@ -41,7 +41,7 @@ class Game:
         self.won = 0
 
     # ? issue:  X update new_location's coordinates. Only updated current_location's coordinates.
-    # ! solution: use the "target" argument to update a targeting location. 
+    # ! solution: use the "target" argument to update a targeting location.
     # see the line 57 and 61
 
     def get_coordinate(self, airport_name, target):
@@ -76,7 +76,7 @@ class Game:
 
         return time, hour
 
-    # ? issue: goal is related to Goal class. 
+    # ? issue: goal is related to Goal class.
     # !solution: move the function below to Goal class.
 
     # def generate_goal(self):
@@ -85,7 +85,7 @@ class Game:
 
     #     no_goal = True
 
-    #     while no_goal: 
+    #     while no_goal:
     #         random_hour_gap = random.randrange(-5,5,1)
     #         random_longitude = self.current_location['longitude'] + (longitude_degree * random_hour_gap)
 
@@ -97,7 +97,7 @@ class Game:
     #             no_goal = False
 
     # ? issue: There were indentations in the line 126, and 129.
-    # ! solution: Removed the indentations. 
+    # ! solution: Removed the indentations.
 
     def calculate_co2(self):
         co2_consumed_per_km = 0.115

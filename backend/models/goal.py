@@ -42,3 +42,4 @@ class Goal:
             self.is_reached = True
         else:
             self.is_reached = False
+      

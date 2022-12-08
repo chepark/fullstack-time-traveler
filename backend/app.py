@@ -1,5 +1,6 @@
 import json
 import os
+import random
 
 from flask import Flask, request, Response
 from flask_cors import CORS
@@ -63,16 +64,32 @@ def getAllAirports():
 # TRIGGERED WHEN...
 # 1. user clicks the submit button after typing her name on the header.
 
-@app.route('/user')
-def getUser():
-    args = request.args
-    name = args.get("name")
-    # TODO:
-    # Find the user with the name in the database SQL.
-    # 1-1 user exists? -> fetch the existing user data from SQL
-    # 1-2 NO user? -> create a new user with class 
-    # insert new user data in SQL.
-    # 2. send response(userdata, status: 200).
+@app.route('/user/<name>')
+def getUser(name):
+    # Check if user already exist or not?
+    sql = "SELECT name, max(score) FROM game_score"
+    sql += " WHERE name='" + name + "'"
+    cursor = config.connection.cursor()
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    # if user exist, return user's name and user's highest score
+    if cursor.rowcount > 0:
+        for row in result:
+            name = row[0]
+            max_score = row[1]
+            response = {
+                "name": name.lower(),
+                "max_score": max_score
+                }
+    # if user does not exist, insert user's name into db (insert both name and score after user finish the game)
+    if cursor.rowcount == 0:
+        add_name = "INSERT INTO user (name) VALUES ('" + name + "')"
+        cursor = config.connection.cursor()
+        cursor.execute(add_name)
+        config.connection.commit()
+        #print("ok")
+
+    return response
 
 
 # DIEP
@@ -84,19 +101,28 @@ def getUser():
 # 2. user clicks 'Start Game' button after finishing quiz 
 
 # if user x takes a quiz -> co2benefit will be set as 0 by default.
-@app.route('/newgame', defaults={'co2benefit': 0})
-def createGame():
-    print('handle new game data')
-    # TODO:
-    # 0. 
-    # 1. create a new game data with userId, and co2benefit
-    # 2. UPDATE co2benefit: check co2benefit argument in URL
-    # 2-1. if co2benefit is greater than 0 
-    # -> update co2benefit value in the game data.
-    # 2-2. if co2benefit is 0
-    # -> do nothing
-    # 3. send response (current location, co2budget, goaltime)
-    # ** There is a chance that some data are missing.
+@app.route('/newgame')
+def newGame():
+    # Fetch the list of large airports from DB
+    sql = "SELECT name, latitude_deg, longitude_deg FROM airport WHERE type='large_airport'"
+    cursor = config.connection.cursor()
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    if cursor.rowcount > 0:
+        # Generate user's initial airport
+        airports = random.choice(results)
+        initial_airport = airports[0]
+        latitude = airports[1]
+        longitude = airports[2]
+        #goal_time = Goal().generate_goal(longitude, latitude)
+        response = {
+                "initial airport": initial_airport,
+                "co2 budget": config.default_co2,
+                "co2 benefit": "get from js",
+                "goal time": "8.00"
+        }
+        return response
+
 
 
 # ANNA
@@ -137,17 +163,24 @@ def draw_result():
 # user clicks Play Next button or Try Again button after getting results.
 
 @app.route('/newgoal')
-def generate_new_goal():
-    print('new goal')
-    # TODO:
-    # create new goal with game.generate_goal
+def generate_newgoal():
+    args = request.args
+    gameId = args.get('gameid')
+    #1. get the longitude, latitude from game class
+    #1.1 for testing purpose, create game instance
+    game = Game()
 
-    # create new goal data in SQL
+    #2. create goal instance
+    goal = Goal()
+    # use generate_goal
+    goal.generate_goal(longitude, latitude)
 
-    # send response (new goal)
-    # data = {"time": goal.time}
-    # response = {"data": data, "status": 200}
-    # return response
+    data = {"new_goal": goal.time, "status": 200}
+    response = {'data': data, 'status': 200}
+    return response
+
+
+
 
 
 if __name__ == '__main__':

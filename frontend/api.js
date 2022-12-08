@@ -14,14 +14,16 @@ export const fetchAllAirports = async () => {
 
 // DIEP
 // It fetches user data from backend
-export const getUser = () => {
-  const uerURL = "";
+export const getUser = async(name) => {
+  const userURL = `${BASE_URL}/user/name`;
+  const response = await fetch(userURL);
 };
 
 // DIEP
 //It fetches new game from backend
 export const fetchNewGame = async () => {
-  const newGameURL = "";
+  const newGameURL = `${BASE_URL}/newgame`;
+  const response = await fetch(newGameURL);
 };
 
 export const getResult = async (gameId, airportName) => {
