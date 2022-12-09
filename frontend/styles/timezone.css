@@ -1,27 +1,28 @@
 /* 3. TIMEZONE MAP */
 .btn-help{
-  z-index: 801;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
+    z-index: 801;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
-#helpButton{
-  position: relative;
-  z-index: 801;
-  display:block;
-  width:80px;
-  height:80px;
-  line-height:80px;
-    border: none;
-  border-radius: 50%;
-  text-align: center;
-  text-decoration:none;
-  background: white;
-  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 
+#helpButton{
+    position: relative;
+    z-index: 801;
+    display:block;
+    width:80px;
+    height:80px;
+    line-height:80px;
+    border: none;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration:none;
+    background: white;
+    box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
+
 #helpButton:hover {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
@@ -30,6 +31,7 @@
     margin: 0.1rem;
     padding: 7px;
 }
+
 .helpButtonText{
     position: absolute;
     color:var(--green);
@@ -38,62 +40,68 @@
     margin: 1px;
     font-size:11px;
 }
+
 #timezoneMap{
-  position: absolute;
-  z-index: 1000;
-  width: 60%;
-  height: 60%;
-  top: 10%;
-  border-radius: 20px;
-  border: none;
-  background: #ffffff;
-  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    position: absolute;
+    z-index: 1000;
+    width: 60%;
+    height: 60%;
+    top: 10%;
+    border-radius: 20px;
+    border: none;
+    background: #ffffff;
+    box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
 #closeButton {
-  position: absolute;
-  right: 17px;
-  top: 2px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.3;
-  border: none;
+    position: absolute;
+    right: 17px;
+    top: 2px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+    border: none;
 }
-#closeButton:hover {
-  opacity: 1;
-  background: #ffffff;
-}
-#closeButton:before, #closeButton:after {
-  opacity: 0.3;
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 33px;
-  width: 2px;
-  background-color: #333;
-}
-#closeButton:before {
-  transform: rotate(45deg);
-}
-#closeButton:after {
-  transform: rotate(-45deg);
-}
-.map_container{
-  display: flex;
-  justify-content: center;
-  padding: 0.2rem;
-  margin: 0.2rem;
-}
-.timezonemap_picture{
 
-  max-width: 85%;
-  max-height: max-content;
-  box-sizing: border-box;
-  object-fit: contain;
-  display: block;
-  margin: auto;
-  object-position: center;
-  border: thin solid darkgray;
-  position: absolute;
+#closeButton:hover {
+    opacity: 1;
+    background: #ffffff;
+}
+
+#closeButton:before, #closeButton:after {
+    opacity: 0.3;
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+}
+
+#closeButton:before {
+    transform: rotate(45deg);
+}
+
+#closeButton:after {
+    transform: rotate(-45deg);
+}
+
+.map_container{
+    display: flex;
+    justify-content: center;
+    padding: 0.2rem;
+    margin: 0.2rem;
+}
+
+.timezonemap_picture{
+    max-width: 85%;
+    max-height: max-content;
+    box-sizing: border-box;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    object-position: center;
+    border: thin solid darkgray;
+    position: absolute;
 }
