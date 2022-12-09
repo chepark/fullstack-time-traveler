@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel = "stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <div class="home-box custom-box ">
+    <h3> Instruction: </h3>
+    <p>Total number of questions: <span class = "total-question"></span></p>
+    <button type="button" class="btn" onclick="startQuiz()">Start Quiz</button>
+  </div>
+  <div class="quiz-box custom-box ">
+    <div class = "question-number">
+
+    </div>
+    <div class="question-text">
+
+    </div>
+    <div class="option-container">
+      <div class="option"></div>
+      <div class="option"></div>
+      <div class="option"></div>
+      <div class="option"></div>
+    </div>
+    <div class="next-question-btn">
+      <button type="button" class="btn" onclick="next()">Next</button>
+    </div>
+    <div class="answers-indicator"></div>
+  </div>
+  <div class="result-box custom-box hide">
+    <h1>Quiz Result</h1>
+    <table>
+      <tr>
+        <td>Total Question</td>
+        <td><span class="total-question"></span></td>
+      </tr>
+      <tr>
+        <td>Attempt</td>
+        <td><span class="total-attempt"></span></td>
+      </tr>
+      <tr>
+        <td>Correct</td>
+        <td><span class="total-correct"></span></td>
+      </tr>
+      <tr>
+        <td>Wrong</td>
+        <td><span class="total-wrong"></span></td>
+      </tr>
+      <tr>
+        <td>Percentage</td>
+        <td><span class="percentage"></span></td>
+      </tr>
+      <tr>
+      <td>Your total Score</td>
+      <td><span class="Your total Score"></span></td>
+      </tr>
+    </table>
+    <button type="button" class="btn" onclick="tryAgain()">Try Again</button>
+    <button type="button" class="btn" onclick="startGame()">Start Game</button>
+  </div>
+<script src="Javascript1.js"></script>
+<script src="question.js"></script>
+</body>
+</html>
