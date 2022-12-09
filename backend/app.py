@@ -67,7 +67,7 @@ def get_user(name):
 
 
 # TESTING URL: 
-# http://127.0.0.1:5000/newgame?gameId=3&co2benefit=20
+# http://127.0.0.1:5000/newgame?gameId=15&co2benefit=20
 @app.route('/newgame')
 def newGame():
     args = request.args
@@ -103,7 +103,7 @@ def newGame():
    
 
 
-# URL: http://127.0.0.1:5000/result?gameId=3&airport_name=Dublin%20Airport
+# URL: http://127.0.0.1:5000/result?gameId=15&airport_name=Dublin%20Airport
 @app.route('/result')
 def draw_result():  
     args = request.args
@@ -154,7 +154,7 @@ def draw_result():
    
 
 
-# URL: http://127.0.0.1:5000/newgoal?&gameId=2&current_location=Jorge%20Newbery%20Airpark
+# URL: http://127.0.0.1:5000/newgoal?&gameId=15&current_location=Jorge%20Newbery%20Airpark
 @app.route('/newgoal')
 def generate_new_goal():
     args = request.args
