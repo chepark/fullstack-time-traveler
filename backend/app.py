@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 
 import config
 from models.game import Game
-from models.user import User
 from models.goal import Goal
 
 # HANDLE LOAD .env file
@@ -41,23 +40,15 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 # TESTING URL: 
 # http://127.0.0.1:5000/airport/all
 @app.route('/airport/all')
-def getAllAirports():
+def get_all_airports():
     try: 
-        sql = "SELECT ident, name, iso_country, latitude_deg, longitude_deg FROM airport WHERE type='large_airport'"
-        cursor = config.connection.cursor()
-        cursor.execute(sql)
-        results = cursor.fetchall()
-        data = []
-
-        for x in results:
-            airport = {"ident": x[0], "name": x[1], "iso_country": x[2], "latitude": x[3], "longitude": x[4]}
-            data.append(airport)
-
-        if cursor.rowcount > 0:
-            response = {"data": data, "status": 200}
-            return response
+        game = Game()
+        data = game.get_airports()
+        response = {"data": data, "status": 200}
+        return response
     except Exception as e: 
-        handleError(e)
+        handleError(e) 
+
 
 # TESTING URL: 
 # http://127.0.0.1:5000/user/sophie
@@ -83,7 +74,6 @@ def get_user(name):
         result = cursor.fetchone() 
 
         # if user exist, return user's name and user's highest score
-    
         if result[0] != None:
             gameId = result[0]
             name = result[1]
@@ -126,12 +116,12 @@ def get_user(name):
 # http://127.0.0.1:5000/newgame?gameId=3&co2benefit=20
 @app.route('/newgame')
 def newGame():
-    game = Game()
-    goal = Goal()
-
     args = request.args
     gameId = int(args.get("gameId"))
     co2benefit = int(args.get("co2benefit"))
+
+    game = Game()
+    goal = Goal()
 
     game.set_co2benefit(co2benefit)
 
@@ -162,44 +152,47 @@ def newGame():
 # URL: http://127.0.0.1:5000/result?gameId=3&airport_name=Dublin%20Airport
 @app.route('/result')
 def draw_result():  
-    game = Game()
-    
-
     args = request.args
     gameId = args.get("gameId")
     new_location_name = args.get("airport_name")
 
-    # update new locatioin coordinate
+    game = Game()
+
+    ### update location and co2 calculation ###
+    # 1. update new locatioin coordinate
     game.new_location['name'] = new_location_name
     game.get_coordinate(new_location_name, 'new')
 
-    # get new location time from api
+    # 2. get new location time from api
     time_data = game.get_time(game.new_location['latitude'], game.new_location['longitude'])
     current_time = time_data[0]
     current_hour = time_data[1]
 
-    # update new location time in game class
+    # 3. update new location time in game class
     game.set_current_time(current_time, current_hour)
 
-    # calculate co2
+    # 4. calculate co2
     game.calculate_co2(gameId)
 
-    # update game data in db: co2, current location
+    # 5. update game data in db: co2, current location
     game.update_db(gameId)
    
     # new location NONE , current location - updated
 
+
+    ### check achievement ###
     goal = Goal()
-    # get goal time from db
+
+    # 1. get goal time from db
     goal.get_goal(gameId)
 
-    # check achievement
+    # 2. check achievement
     goal.is_goal_reached(game.current_time['time'])
 
-    # set data to response
+    # 3. prepare data for response
     success = goal.is_reached
     game_over = game.game_over
-    data = {"co2budget": game.co2_budget, 'success': success, 'game_over': game_over}
+    data = {'current_time':current_time, 'co2budget': game.co2_budget, 'success': success, 'game_over': game_over}
     response = {"data": data, "status": 200}
     
     # send response
@@ -207,32 +200,34 @@ def draw_result():
    
 
 
-# URL: http://127.0.0.1:5000/newgoal?userid=user112&gameid=game292&current_loc=helsinki%airport
+# URL: http://127.0.0.1:5000/newgoal?&gameId=2&current_location=Jorge%20Newbery%20Airpark
 @app.route('/newgoal')
 def generate_new_goal():
-    game = Game("name", "current_location")
-    goal = Goal()
-    game.current_location = {"name= Helsinki Airport", 'longitude=60.19 ', 'latitude=24.94 '}
-    game.get_coordinate("current_location_name")
-    game.current_location = game.new_location
-    print(f"Current location is: {game.current_location}")
-
     args = request.args
-    gameid = args.get("gameid")
-    current_loc = args.get("current_loc")
+    gameId = args.get("gameId")
+    user_selection = args.get("current_location")
 
-
+    game = Game()
     goal = Goal()
-    game.current_time_result = game.current_location
-    goal.generate_goal('latitude''longitude')
 
-    data = {"new_goal": goal.time, "status":200}
+    # 1. get coordinates of the current location
+    game.get_coordinate(user_selection, 'current')
+    longitude = game.current_location['longitude']
+    latitude = game.current_location['latitude']
+
+    # 2. generate new goal
+    goal.generate_goal(longitude, latitude)
+
+    # 3. save new goal in db
+    goal.update_goal_time(gameId)
+
+    
+    # 4. send data (current time, new goal)
+    data = {"new_goal": goal.time}
     response = {"data": data, "status": 200}
     return response
 
 
-    # def getGameInstance():
-    #     return globalGame
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=5000)
