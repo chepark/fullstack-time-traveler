@@ -16,6 +16,7 @@ let availableOptions = [];
 let correctAnswers = 0;
 let attempt = 0;
 
+
 //push the questions into availableQuestions array
 function setAvailableQuestions(){
   const totalQuestion = quiz.length;
