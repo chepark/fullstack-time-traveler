@@ -8,7 +8,7 @@ import config
 import requests
 from datetime import datetime
 from geopy.distance import geodesic as GD
-
+from decimal import Decimal
 
 class Game:
     def __init__(self):  
@@ -62,6 +62,8 @@ class Game:
     def calculate_co2(self, gameId):
         co2_consumed_per_km = 0.115
         data = self.get_game_data(gameId)
+        self.co2_consumed = data['co2consumed']
+        self.con2_budget = data['co2budget']
         self.current_location['name'] = data['current_location']
         self.current_location['longitude'] = data['current_longitude']
         self.current_location['latitude'] = data['current_latitude']
@@ -69,13 +71,13 @@ class Game:
         if self.co2_budget > 0:
             self.total_try += 1
 
-            print('new', self.new_location)
             current_gps_set = (float(self.current_location['latitude']), float(self.current_location['longitude']))
             new_gps_set = (float(self.new_location['latitude']), float(self.new_location['longitude']))
             distance = GD(current_gps_set, new_gps_set).km
 
             # CALCULATED COMSUMED AND AVAILABLE C02.
-            self.co2_consumed = distance * co2_consumed_per_km
+            current_co2_consumed = distance * co2_consumed_per_km
+            self.co2_consumed = self.co2_consumed + Decimal(current_co2_consumed)
             self.co2_budget = self.co2_budget - self.co2_consumed
 
         if self.co2_budget < 0:
@@ -95,10 +97,9 @@ class Game:
         set_default += f"co2budget={self.co2_budget}, "
         set_default += f"current_location='{self.current_location['name']}', "
         set_default += f"current_longitude='{self.current_location['longitude']}', "
-        set_default += f"current_latitude='{self.current_location['latitude']}' "
-        # ! update current time in /newgoal
-        # set_default += f"`current_time`='{current_time[0]}', "
-        # set_default += f"current_hour = {current_time[1]}, "
+        set_default += f"current_latitude='{self.current_location['latitude']}', "
+        set_default += f"`current_time`='{self.current_time['time']}', "
+        set_default += f"current_hour = {self.current_time['hour']} "
         set_default += f"WHERE gameId={gameId}"
         
         cursor = config.connection.cursor()
@@ -124,6 +125,10 @@ class Game:
     
     def set_co2benefit(self, co2benefit):
         self.co2_benefit = co2benefit
+
+    def set_current_time(self, time, hour): 
+        self.current_time['time'] = time
+        self.current_time['hour'] = hour
 
     def set_default_data(self, gameId, current_time, goal_time):
         # ? syntax error: https://stackoverflow.com/questions/9054814/mysql-update-query-syntax-error

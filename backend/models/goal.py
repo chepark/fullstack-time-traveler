@@ -1,12 +1,11 @@
 import requests
 import random
+import config
 from models.game import Game
 
 class Goal(Game):
     def __init__(self):
-        # remove gameId
-        # self.gameId = 'goal' + str(Goal.total_goals)
-        self.timezone = None  # add getTimeZoneName on init?
+        self.timezone = None  
         self.is_reached = False
         self.time = None
         self.hour = None
@@ -37,9 +36,19 @@ class Goal(Game):
                 no_goal = False
 
     # checks if the goal time is reached and updates is_reached in goal.py
-    def is_goal_reached(self, latitude, longitude):
-        if self.time == super().get_time(latitude, longitude):
+    def is_goal_reached(self, current_time):
+        if self.time == current_time:
             self.is_reached = True
         else:
             self.is_reached = False
-      
+    
+    def get_goal(self, gameId):
+        sql = f"SELECT goal_hour, goal_time FROM game WHERE gameId={gameId}"   
+        cursor = config.connection.cursor()
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        self.hour = result[0]
+        self.time = result[1] 
+
+
+

@@ -84,6 +84,7 @@ def get_user(name):
         result = cursor.fetchone() 
 
         # if user exist, return user's name and user's highest score
+    
         if result[0] != None:
             gameId = result[0]
             name = result[1]
@@ -91,7 +92,6 @@ def get_user(name):
             data = {
                 "is_new_user": False,
                 "game_id": gameId,
-                "name": name,
                 "max_score": max_score, 
                 }
             response = {"data": data, "status": 200}
@@ -118,6 +118,7 @@ def get_user(name):
 
             response = {"data": data, "status": 200}
             return response
+
     except Exception as e: 
         handleError(e)      
 
@@ -163,7 +164,7 @@ def newGame():
 @app.route('/result')
 def draw_result():  
     game = Game()
-    goal = Goal()
+    
 
     args = request.args
     gameId = args.get("gameId")
@@ -173,19 +174,36 @@ def draw_result():
     game.new_location['name'] = new_location_name
     game.get_coordinate(new_location_name, 'new')
 
+    # get new location time from api
+    time_data = game.get_time(game.new_location['latitude'], game.new_location['longitude'])
+    current_time = time_data[0]
+    current_hour = time_data[1]
+
+    # update new location time in game class
+    game.set_current_time(current_time, current_hour)
+
     # calculate co2
     game.calculate_co2(gameId)
 
-    # update game data: co2, current location
+    # update game data in db: co2, current location
     game.update_db(gameId)
    
+    # new location NONE , current location - updated
+
+    goal = Goal()
+    # get goal time from db
+    goal.get_goal(gameId)
+
     # check achievement
-    goal.is_goal_reached(game.current_location['latitude'], game.current_location['longitude'])  # checks if the time in current_location the same as in goal time
+    goal.is_goal_reached(game.current_time['time'])
+
+    # set data to response
     success = goal.is_reached
     game_over = game.game_over
-
     data = {"co2budget": game.co2_budget, 'success': success, 'game_over': game_over}
     response = {"data": data, "status": 200}
+    
+    # send response
     return response
    
 
