@@ -38,29 +38,44 @@ function closeMap() {
 }
 //CO2 INDICATOR
 
-//function to fetch data from API
-async function getData(url){
-  const response = await fetch(url);
-  if (!response.ok) throw new Error ('Invalid server input!');
-  const data = await response.json();
-  return data
-}
-// function to update game status
-function updateCO2(CO2left, CO2discount) {
-  document.querySelector('#player-name').innerHTML = `Player: ${status.name}`;
-  document.querySelector('#consumed').innerHTML = status.co2.consumed;
-  document.querySelector('#budget').innerHTML = status.co2.budget;
+// function to update CO2 indicator
+function updateCO2(CO2budget, CO2left) { //change to status? line 38 example code
+  let percentCalculator = (CO2left*100)/CO2budget;
+  let percentCO2Left = percentCalculator.toString() +'%';
+  document.getElementById('budget').innerHTML = CO2left+ ' of ' + CO2budget + ' CO2 Budget';
+  document.getElementById('co2-container').style.width = percentCO2Left;
 }
 
-//start te game and calls the other functions
-async function gameSetup(){
-  try{
-    const response = await fetch('');
-    const data = await response.json();
-    console.log(data);
-
-  } catch (error) {
-    console.log(error);
-  }
+//function to update current time in the right panel
+function updateCurrentTime(currentLocation, currentTime){//change to status?
+  let value = document.getElementById('currentTime');
+  value.innerHTML = currentLocation + ' Current time <br><br>' + currentTime;
 }
+
+//function to update goal time in the right panel
+function updateGoalTime(goalTime){
+  let gtime = document.getElementById('goalTime');
+  gtime.innerHTML = 'Goal time <br><br>' + goalTime;
+}
+
+//functions to update guide messages
+function updateGuideLocation(currentAirport, currentCountry, currentTime){
+  let location = document.getElementById('timeTravelerLocation');
+  location.innerHTML = `Time Traveler: You are now in ${currentAirport} in ${currentCountry}. Local time is ${currentTime}.`
+
+}
+
+function updateGuideGoal(goalTime) {
+  let timeToFind = document.getElementById('timeTravelerGoal');
+  timeToFind.innerHTML = `Time Traveler: Please find the airport located in the goal time zone. The goal time is ${goalTime}.`
+}
+
+
+//TESTING VALUES
+updateCO2(5000, 2000);
+updateCurrentTime('Helsinki Airport','6:30');
+updateGoalTime('4:30');
+updateGuideLocation('Helsinki Airport', 'Finland', '6:30');
+updateGuideGoal('4:30');
+
 

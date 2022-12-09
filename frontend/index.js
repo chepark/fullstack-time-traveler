@@ -1,4 +1,4 @@
-import { displayMap, addMapMarkers } from "./game.js";
+import { displayMap, addMapMarkers} from "./game.js";
 import { fetchAllAirports, getResult } from "./api.js";
 
 displayMap();
