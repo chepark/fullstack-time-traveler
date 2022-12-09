@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
     <!-- LEAFLET STYLES -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
     <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="message.js">
     <!-- LEAFLET SCRIPT -->
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" defer></script>
     <title>Time Traveler</title>
@@ -73,9 +74,13 @@
         </dialog>
 
         <!-- Message-->
-        <dialog>
-            <
-        </dialog>
+    <dialog open class="popup" id="popup">
+            <h1>Congratulation</h1>
+           <img src="https://th.bing.com/th/id/R.4f217d352ae116656039058b27496607?rik=ul6O0wSC3s3z3w&riu=http%3a%2f%2fclipartmag.com%2fimages%2fcongrats-smiley-faces-19.jpg&ehk=tvHFi7EklCtwEo%2beSm5eh1l7YGDd2bsYSCOEIo7u%2fZk%3d&risl=&pid=ImgRaw&r=0=">
+            <p>You found the right timezone </p>
+            <button type="button" onclick="closePopup()"> Exit </button>
+            <button type="button" onclick="closePopup()"> Play next</button>
+    </dialog>
 
     </div>
 
