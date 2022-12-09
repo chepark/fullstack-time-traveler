@@ -38,7 +38,6 @@ class Game:
             data.append(airport)
 
         if cursor.rowcount > 0:
-            print(data)
             return data
 
     # get coordinate info of the location
@@ -176,7 +175,6 @@ class Game:
 
     # update data in DB
     def update_db(self, gameId):
-        print('budget', self.co2_budget)
         set_default = "UPDATE game SET "
         set_default += f"co2consumed = {self.co2_consumed}, "
         set_default += f"co2budget={self.co2_budget}, "

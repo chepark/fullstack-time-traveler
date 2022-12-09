@@ -29,7 +29,6 @@ class Goal(Game):
             random_longitude = current_longitude + (longitude_degree * random_hour_gap)
 
             time_result = super().get_time(current_latitude, random_longitude)
-            print('TIME_RESULT', time_result)
             self.time = time_result[0]
             self.hour = time_result[1]
 

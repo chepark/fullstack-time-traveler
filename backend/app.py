@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 import config
 from models.game import Game
 from models.goal import Goal
+from models.user import User
 
 # HANDLE LOAD .env file
 # PLEASE TAKE A LOOK 
@@ -54,59 +55,12 @@ def get_all_airports():
 # http://127.0.0.1:5000/user/sophie
 @app.route('/user/<name>')
 def get_user(name):
-    # ! issue:
-    # Minor:  max(score) result throws ALWAYS ONE result. -> cursor.rowcount result is ONE ALWAYS.
-    # Therefore, the logic in the line 96 does not catch new user. | "if cursor.rowcount == 0"
-    # Take a look: https://pynative.com/python-cursor-fetchall-fetchmany-fetchone-to-read-rows-from-table/
-
-    # Major:  fetchall() returns 1 row of (None), if there is no data in db. 
-    # It returns always more than 1 no matter row exists or not.
-    # Better to use fetchone() for cleaner code. 
-    # Other possibility: My DB table set is different from Diep's
-    
-    # Check if user already exist or not?
     try: 
-        sql = "SELECT gameId, userName, max(score) FROM game"
-        sql += " WHERE userName='" + name + "'"
+        user = User()
 
-        cursor = config.connection.cursor()
-        cursor.execute(sql)
-        result = cursor.fetchone() 
-
-        # if user exist, return user's name and user's highest score
-        if result[0] != None:
-            gameId = result[0]
-            name = result[1]
-            max_score = result[2]
-            data = {
-                "is_new_user": False,
-                "game_id": gameId,
-                "max_score": max_score, 
-                }
-            response = {"data": data, "status": 200}
-            return response
-
-        # if user does not exist, insert user's name into db (insert both name and score after user finish the game)
-        else:
-            add_name = "INSERT INTO game (userName) VALUES ('" + name + "')"
-            cursor = config.connection.cursor()
-            cursor.execute(add_name)
-            config.connection.commit()
-            
-            get_gameId = "SELECT LAST_INSERT_ID()"
-            cursor = config.connection.cursor()
-            cursor.execute(get_gameId)
-            gameId = cursor.fetchone()[0]
-
-            data = {
-                    "is_new_user": True,
-                    "game_id": gameId,
-                    "name": name,
-                    "max_score": None, 
-                    }
-
-            response = {"data": data, "status": 200}
-            return response
+        data = user.get_user(name)
+        response = {"data": data, "status": 200}
+        return response
 
     except Exception as e: 
         handleError(e)      
