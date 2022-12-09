@@ -24,10 +24,12 @@ export const fetchNewGame = async () => {
   const newGameURL = "";
 };
 
-// ANNA
-//It fetches result from backend
-export const getResult = async () => {
-  const resultURL = "";
+export const getResult = async (gameId, airportName) => {
+  const resultURL = `${BASE_URL}/result?gameId=${gameId}?airport_name=${airportName}`;
+  // const resultURL = `${BASE_URL}/result?gameId=game292?airport_name=Dublin%Airport`;
+  const response = await fetch(resultURL);
+  const { data } = await response.json();
+  return data;
 };
 
 // MAMITA

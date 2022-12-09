@@ -1,5 +1,5 @@
-# ENVIRONMENTS
-backend/.venv/**/*
-backend/.idea/**/*
-backend/__psyche__/**/*
+
+.venv/**/*
+.idea/**/*
 .env
+__pycache__/**/*

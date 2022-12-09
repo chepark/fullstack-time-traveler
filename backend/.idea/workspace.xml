@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1a6fd3e-0743-4d3a-80d4-7318cceb94c2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/styles/game.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/styles/game.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/utils/message.js" beforeDir="false" />
-    </list>
+    <list default="true" id="b1a6fd3e-0743-4d3a-80d4-7318cceb94c2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,14 +16,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cheah/Documents/programming/time-traveler/backend&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/cheah/Desktop/time-traveler"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -44,6 +34,7 @@
       <updated>1669225142367</updated>
       <workItem from="1669225143526" duration="30000" />
       <workItem from="1669636478761" duration="1243000" />
+      <workItem from="1669971160007" duration="45000" />
     </task>
     <servers />
   </component>
