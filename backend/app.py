@@ -32,7 +32,6 @@ def handleError(error_message):
     response = {"error":error_message, "status": 500}
     return response
 
-
 app = Flask(__name__)
 
 # HANDLE CORS ISSUE
@@ -210,23 +209,30 @@ def draw_result():
 
 # URL: http://127.0.0.1:5000/newgoal?userid=user112&gameid=game292&current_loc=helsinki%airport
 @app.route('/newgoal')
-def generate_newgoal():
-    args = request.args
-    gameId = args.get('gameid')
-    #1. get the longitude, latitude from game class
-    #1.1 for testing purpose, create game instance
-    game = Game()
-
-    #2. create goal instance
+def generate_new_goal():
+    game = Game("name", "current_location")
     goal = Goal()
-    # use generate_goal
-    goal.generate_goal(longitude, latitude)
-    data = {"new_goal": goal.time, "status": 200}
-    response = {'data': data, 'status': 200}
+    game.current_location = {"name= Helsinki Airport", 'longitude=60.19 ', 'latitude=24.94 '}
+    game.get_coordinate("current_location_name")
+    game.current_location = game.new_location
+    print(f"Current location is: {game.current_location}")
+
+    args = request.args
+    gameid = args.get("gameid")
+    current_loc = args.get("current_loc")
+
+
+    goal = Goal()
+    game.current_time_result = game.current_location
+    goal.generate_goal('latitude''longitude')
+
+    data = {"new_goal": goal.time, "status":200}
+    response = {"data": data, "status": 200}
     return response
 
-def getGameInstance():
-    return globalGame
+
+    # def getGameInstance():
+    #     return globalGame
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=5000)
