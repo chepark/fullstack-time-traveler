@@ -137,7 +137,7 @@ def draw_result():
 # user clicks Play Next button or Try Again button after getting results.
 
 @app.route('/newgoal')
-<<<<<<< HEAD
+
 def generate_new_goal():
     game = Game("name", "current_loc")
     goal = Goal()
@@ -156,7 +156,7 @@ def generate_new_goal():
 
 
 # create new goal with game.generate_goal
-=======
+#=======
 def generate_newgoal():
     args = request.args
     gameId = args.get('gameid')
@@ -172,7 +172,7 @@ def generate_newgoal():
     data = {"new_goal": goal.time, "status": 200}
     response = {'data': data, 'status': 200}
     return response
->>>>>>> d152716c096ce21ac36fe85e067d524e4e4d75f4
+#>>>>>>> d152716c096ce21ac36fe85e067d524e4e4d75f4
 
 
 

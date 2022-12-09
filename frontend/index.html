@@ -27,7 +27,9 @@
                 <!-- MAP -->
                 <div id="map">
                     <!-- HELP BUTTON -->
-                    <div class="btn-help"></div>
+                    <div class="btn-help">
+                        <button id="helpButton"> <img src="assets/img/helpIcon.svg" width="40px" height= "40px">Help</button>
+                    </div>
                 </div>
             </div>
             <div class="panel panel-right">
@@ -58,10 +60,10 @@
             </div>
         </main>
         <!-- 3. TIMEZONE MAP -->
-        <dialog open class="map_hide">
-            <p class="close"></p>
-            <div class="map_container"><img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture" alt="timezone map">
-                </div>
+        <dialog id="timezoneMap">
+            <button id="closeButton"></button>
+            <div class="map_container "><img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture"  alt="timezone map">
+            </div>
         </dialog>
         <!-- 4. QUIZ -->
         <dialog>

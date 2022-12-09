@@ -23,6 +23,29 @@
 #map {
   height: 100%;
 }
+.btn-help{
+  z-index: 801;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+#helpButton{
+  position: relative;
+  z-index: 801;
+  display:block;
+  width:80px;
+  height:80px;
+  line-height:80px;
+  border: 2px solid #f5f5f5;
+  border-radius: 50%;
+  color:var(--green);
+  text-align:center;
+  text-decoration:none;
+  background: white;
+  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  font-size:20px;
+  font-weight:bold;
+}
 
 .indicator-co2 {
   margin: 0.3rem;
@@ -83,10 +106,9 @@ ul {
   text-align: left;
 }
 /* 3. TIMEZONE MAP */
-.map_hide{
+#timezoneMap{
   position: absolute;
   z-index: 1000;
-  display: flex;
   width: 60%;
   height: 60%;
   top: 10%;
@@ -97,18 +119,19 @@ ul {
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
-.close {
+#closeButton {
   position: absolute;
   right: 17px;
   top: 2px;
   width: 32px;
   height: 32px;
   opacity: 0.3;
+  border: none;
 }
-.close:hover {
+#closeButton:hover {
   opacity: 1;
 }
-.close:before, .close:after {
+#closeButton:before, #closeButton:after {
   position: absolute;
   left: 15px;
   content: ' ';
@@ -116,10 +139,10 @@ ul {
   width: 2px;
   background-color: #333;
 }
-.close:before {
+#closeButton:before {
   transform: rotate(45deg);
 }
-.close:after {
+#closeButton:after {
   transform: rotate(-45deg);
 }
 .map_container{
@@ -129,14 +152,14 @@ ul {
   margin: 0.2rem;
 }
 .timezonemap_picture{
-  max-width: 100%;
-  max-height: 100%;
+
+  max-width: 85%;
+  max-height: max-content;
   box-sizing: border-box;
   object-fit: contain;
   display: block;
   margin: auto;
   object-position: center;
-  padding: 0.3rem;
-  border: thin solid #303030;
-
+  border: thin solid darkgray;
+  position: absolute;
 }

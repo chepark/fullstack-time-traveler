@@ -15,3 +15,13 @@ export const addMapMarkers = (airports) => {
     return L.marker([airport.latitude, airport.longitude]).addTo(map);
   });
 };
+
+let timezonemap = document.getElementById("timezoneMap");
+
+function showMap() {
+  timezonemap.show();
+}
+
+function closeMap() {
+  timezonemap.close();
+}
