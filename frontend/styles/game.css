@@ -33,14 +33,14 @@
   box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
-.full_budget_container{
+.full_budget_container {
   background-color: var(--lightGreen);
-  border-radius:16px;
+  border-radius: 16px;
 }
-.co2-container{
-  padding:0.01em 16px;
-  background-color:var(--green);
-  border-radius:16px;
+.co2-container {
+  padding: 0.01em 16px;
+  background-color: var(--green);
+  border-radius: 16px;
   width: 50%;
   height: 20px;
 }
@@ -68,7 +68,7 @@ ul {
   box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
-.time-goal{
+.time-goal {
   color: var(--green);
 }
 .guide {
@@ -80,6 +80,49 @@ ul {
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   border-radius: 20px;
 }
-.guide_messages{
+.guide_messages {
   text-align: left;
+<<<<<<< HEAD
 }
+=======
+}
+/* 3. TIMEZONE MAP */
+.map_hide {
+  position: absolute;
+  z-index: 1000;
+  width: 50%;
+  height: 50%;
+  top: 10%;
+  border-radius: 20px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.close_button {
+  border: none;
+  background: #27ba35;
+  top: 0.1rem;
+  right: 0.1rem;
+  align-items: center;
+  cursor: pointer;
+}
+.close {
+  font-size: 40px;
+  font-weight: 300;
+  padding: 0.3rem;
+  margin: 0.3rem;
+  color: #1f1f1f;
+  background: #ffffff;
+  position: absolute !important;
+}
+
+.timezonemap_picture {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  padding: 0.1rem;
+  border: thick #1f1f1f;
+}
+>>>>>>> 100188f1154fc64cd770c6c6278ca02f8da30cca

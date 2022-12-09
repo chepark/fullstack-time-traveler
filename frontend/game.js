@@ -46,7 +46,7 @@ async function getData(url){
   return data
 }
 // function to update game status
-function updateCO2(status) {
+function updateCO2(CO2left, CO2discount) {
   document.querySelector('#player-name').innerHTML = `Player: ${status.name}`;
   document.querySelector('#consumed').innerHTML = status.co2.consumed;
   document.querySelector('#budget').innerHTML = status.co2.budget;

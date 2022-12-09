@@ -1,15 +1,16 @@
-import json
 import os
+import random
+from decimal import *
 
-from flask import Flask, request, Response
+from flask import Flask, request, Response, g
 from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
 
 import config
 from models.game import Game
-from models.user import User
 from models.goal import Goal
+from models.user import User
 
 # HANDLE LOAD .env file
 # PLEASE TAKE A LOOK 
@@ -18,7 +19,6 @@ from models.goal import Goal
 load_dotenv()
 
 # CONNECT TO DB
-# os.envinron.get brings variables from .env file.
 config.connection = mysql.connector.connect(
     host=os.environ.get('HOST'),
     port=3306,
@@ -28,114 +28,133 @@ config.connection = mysql.connector.connect(
     autocommit=True
 )
 
+def handleError(error_message): 
+    response = {"error":error_message, "status": 500}
+    return response
+
 app = Flask(__name__)
 
-# HANDLING Cross Origin Resource Sharing ISSUE
+# HANDLE CORS ISSUE
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-
+# TESTING URL: 
 # http://127.0.0.1:5000/airport/all
-# EXAMPLE
-
-# Add TRY-EXCEPT in each method
-# add one common errorHandler function
-
 @app.route('/airport/all')
-def getAllAirports():
-    sql = "SELECT ident, name, iso_country, latitude_deg, longitude_deg FROM airport WHERE type='large_airport'"
-    cursor = config.connection.cursor()
-    cursor.execute(sql)
-    results = cursor.fetchall()
-    data = []
+def get_all_airports():
+    try: 
+        game = Game()
+        data = game.get_airports()
+        response = {"data": data, "status": 200}
+        return response
+    except Exception as e: 
+        handleError(e) 
 
-    for x in results:
-        airport = {"ident": x[0], "name": x[1], "iso_country": x[2], "latitude": x[3], "longitude": x[4]}
-        data.append(airport)
 
-    if cursor.rowcount > 0:
+# TESTING URL: 
+# http://127.0.0.1:5000/user/sophie
+@app.route('/user/<name>')
+def get_user(name):
+    try: 
+        user = User()
+
+        data = user.get_user(name)
         response = {"data": data, "status": 200}
         return response
 
+    except Exception as e: 
+        handleError(e)      
 
-# DIEP
-# URL: http://127.0.0.1:5000/user?name=sophie
-# TRIGGERED WHEN...
-# 1. user clicks the submit button after typing her name on the header.
 
-@app.route('/user')
-def getUser():
+# TESTING URL: 
+# http://127.0.0.1:5000/newgame?gameId=15&co2benefit=20
+@app.route('/newgame')
+def newGame():
     args = request.args
-    name = args.get("name")
-    # TODO:
-    # Find the user with the name in the database SQL.
-    # 1-1 user exists? -> fetch the existing user data from SQL
-    # 1-2 NO user? -> create a new user with class 
-    # insert new user data in SQL.
-    # 2. send response(userdata, status: 200).
+    gameId = int(args.get("gameId"))
+    co2benefit = int(args.get("co2benefit"))
+
+    game = Game()
+    goal = Goal()
+
+    game.set_co2benefit(co2benefit)
+
+    # 1. generate random airport to start
+    game.set_random_airport()
+
+    longitude = game.current_location['longitude']
+    latitude = game.current_location['latitude']
+    
+    # 2. get initial local time
+    current_time = game.get_time(latitude, longitude)
+    
+    # 3. generate goal
+    goal.generate_goal(longitude, latitude)
+    goal_time = [goal.time, goal.hour]
+
+    # 4. set necessary data in SQL to start game
+    game.set_default_data(gameId, current_time, goal_time)
+  
+    # 5. get data from db & send response
+    data = game.get_game_data(gameId)
+    response = {"data": data, "status": 200}
+    
+    return response
+   
 
 
-# DIEP
-# URL: http://127.0.0.1:5000/newgame?userid=user112?co2benefit=20
-# Arguments: userid, co2benefit
-# TRIGGERED WHEN...
-# 1. user clicks 'No, Thank' button when she is asked to take a quiz.
-# OR
-# 2. user clicks 'Start Game' button after finishing quiz 
-
-# if user x takes a quiz -> co2benefit will be set as 0 by default.
-@app.route('/newgame', defaults={'co2benefit': 0})
-def createGame():
-    print('handle new game data')
-    # TODO:
-    # 0. 
-    # 1. create a new game data with userId, and co2benefit
-    # 2. UPDATE co2benefit: check co2benefit argument in URL
-    # 2-1. if co2benefit is greater than 0 
-    # -> update co2benefit value in the game data.
-    # 2-2. if co2benefit is 0
-    # -> do nothing
-    # 3. send response (current location, co2budget, goaltime)
-    # ** There is a chance that some data are missing.
-
-
-# ANNA
-# URL: http://127.0.0.1:5000/result?gameId=game292?airport_name=Dublin%Airport
-# Arguments: gameid, airport_name
-# TRIGGERED WHEN...
-# 1. user selects a new airport
-
+# URL: http://127.0.0.1:5000/result?gameId=15&airport_name=Dublin%20Airport
 @app.route('/result')
 def draw_result():  
+    args = request.args
+    gameId = args.get("gameId")
+    new_location_name = args.get("airport_name")
 
-    goal = Goal()  # temporary
-    game = Game("name", 5000)  # temporary
-    # args = request.args
-    # new_location_name = args.get("airport_name")
-    new_location_name = "Dublin Airport"  # temporary
+    game = Game()
 
+    ### update location and co2 calculation ###
+    # 1. update new locatioin coordinate
+    game.new_location['name'] = new_location_name
     game.get_coordinate(new_location_name, 'new')
-    print(f"Coordinates are taken. New location is: {game.new_location}")
-    game.calculate_co2()
-    print(f"CO2 calculated. CO2 budget: {game.co2_budget}")
-    print(f"current location is {game.current_location}")
 
-    # (correct time zone or not)
-    goal.is_goal_reached(game)  # checks if the time in current_location the same as in goal time
+    # 2. get new location time from api
+    time_data = game.get_time(game.new_location['latitude'], game.new_location['longitude'])
+    current_time = time_data[0]
+    current_hour = time_data[1]
+
+    # 3. update new location time in game class
+    game.set_current_time(current_time, current_hour)
+
+    # 4. calculate co2
+    game.calculate_co2(gameId)
+
+    # 5. update game data in db: co2, current location
+    game.update_db(gameId)
+   
+    # new location NONE , current location - updated
+
+
+    ### check achievement ###
+    goal = Goal()
+
+    # 1. get goal time from db
+    goal.get_goal(gameId)
+
+    # 2. check achievement
+    goal.is_goal_reached(game.current_time['time'])
+
+    # 3. prepare data for response
     success = goal.is_reached
     game_over = game.game_over
-
-    data = {"co2budget": game.co2_budget, 'success': success, 'game_over': game_over}
+    data = {'current_time':current_time, 'co2budget': game.co2_budget, 'success': success, 'game_over': game_over}
     response = {"data": data, "status": 200}
+    
+    # send response
     return response
+   
 
 
-# MAMITA
-# URL: http://127.0.0.1:5000/newgoal?userid=user112?gameid=game292?current_loc=helsinki%airport
-# Arguments: userid, gameid, current_loc
-# TRIGGERED WHEN ...
-# user clicks Play Next button or Try Again button after getting results.
-
+# URL: http://127.0.0.1:5000/newgoal?&gameId=15&current_location=Jorge%20Newbery%20Airpark
 @app.route('/newgoal')
 
 def generate_new_goal():
@@ -156,24 +175,27 @@ def generate_new_goal():
 
 
 # create new goal with game.generate_goal
-#=======
-def generate_newgoal():
+def generate_new_goal():
     args = request.args
-    gameId = args.get('gameid')
-    #1. get the longitude, latitude from game class
-    #1.1 for testing purpose, create game instance
+    gameId = args.get("gameId")
+    user_selection = args.get("current_location")
+
     game = Game()
-
-    #2. create goal instance
     goal = Goal()
-    # use generate_goal
+
+    # 1. get coordinates of the current location
+    game.get_coordinate(user_selection, 'current')
+    longitude = game.current_location['longitude']
+    latitude = game.current_location['latitude']
+
+    # 2. generate new goal
     goal.generate_goal(longitude, latitude)
-
-    data = {"new_goal": goal.time, "status": 200}
-    response = {'data': data, 'status': 200}
+    # 3. save new goal in db
+    goal.update_goal_time(gameId)
+    # 4. send data (current time, new goal)
+    data = {"new_goal": goal.time}
+    response = {"data": data, "status": 200}
     return response
-#>>>>>>> d152716c096ce21ac36fe85e067d524e4e4d75f4
-
 
 
 
