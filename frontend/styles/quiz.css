@@ -1,5 +1,145 @@
 @import "./common.css";
 
 #quiz {
-  max-width: 1000px;
+  /* toggle */
+  display: none;
+  width: 100%;
+}
+
+.quiz-status {
+  margin-bottom: 1rem;
+  font-size: 12px;
+  color: grey;
+}
+
+/* ----- QUIZ OPTIONS ----- */
+.quiz-options {
+  border: none;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.option-wrapper {
+  padding: 0.7rem 1rem;
+  padding-left: 2.5rem;
+  border-radius: 13px;
+  box-shadow: 0px 3px 20px -1px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.option-wrapper input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.option-wrapper:has(input:checked) {
+  background-color: var(--green);
+  color: white;
+}
+
+.option-wrapper:hover {
+  transform: scale(1.01);
+  transition: 0.1s;
+  transition-timing-function: ease-in-out;
+}
+
+.option-wrapper input:checked ~ .checkmark {
+  background-color: white;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.option-wrapper input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.option-wrapper .checkmark:after {
+  top: 5px;
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.option-wrapper .checkmark.wrong:after {
+  background: var(--red);
+}
+
+/* CORRECT ANSWER MARKER */
+.option-wrapper input ~ .checkmark.answer {
+  background-color: white;
+}
+
+.option-wrapper input ~ .checkmark.answer:after {
+  display: block;
+}
+
+.option-wrapper .checkmark.answer:after {
+  top: 5px;
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+/* ----- QUIZ BUTTON ----- */
+.quiz-btns {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-bg__grey {
+  background-color: var(--lightGray);
+  padding: 0.8rem 1rem;
+}
+
+.btn-bg__grey:hover {
+  background-color: var(--green);
+  color: white;
+}
+
+#quiz-submit {
+  /* toggle */
+  display: block;
+}
+
+#quiz-next {
+  /* toggle */
+  display: none;
+  background-color: var(--green);
+  padding: 0.8rem 1rem;
+  color: white;
+}
+
+/* ----- QUIZ RESULT ----- */
+#quiz-result {
+  /* toggle */
+  display: none;
 }

@@ -1,0 +1,78 @@
+/* MODAL COMMON */
+.modal {
+  /* display: none; */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-container {
+  max-width: 500px;
+  height: 500px;
+
+  background-color: white;
+  border-radius: 15px;
+
+  padding-left: 4rem;
+  padding-right: 4rem;
+
+  margin: auto;
+  transform: translateY(40%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+.modal-btns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  margin-top: 2rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background-color: transparent;
+  border: none;
+}
+
+.modal-close svg {
+  fill: #babfc4;
+  cursor: pointer;
+}
+
+.modal-close svg:hover {
+  fill: #000;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  text-align: center;
+}
+
+/* QUIZ */
+.modal-content.quiz-content {
+  width: 500px;
+  border: 1px solid black;
+}
+
+/* GAME MESSAGE */
+.modal-content.game-message {
+  width: 300px;
+}

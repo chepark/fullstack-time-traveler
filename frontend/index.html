@@ -58,8 +58,37 @@
 
 
             </div>
+        </main>
+        <!-- QUIZ -->
+        <div id="quiz-modal" class="modal">
+            <div class="modal-container container-quiz">
+                <!-- QUIZ PERMISSION -->
+                <div id="quiz-permission" class="modal-content">
+                    <div class="text-main text-main__large">Hello David!</div>
+                    <div class="text-main text-main__medium">Do you want to take a quiz <br>and get a low-emission
+                        flight?
+                    </div>
+                    <div class="modal-btns btn-wrapper">
+                        <button id="reject-quiz" class="btn-quiz btn__grey">NO, THANKS</button>
+                        <button id="try-quiz" class="btn-quiz btn__green">YES, I WANT!</button>
+                    </div>
+                </div>
+                <!-- START QUIZ -->
+                <div id="quiz">
+                    <!-- place to render quiz -->
+                    <div class="quiz-btns" data-submitted="false">
+                        <button id="quiz-submit" class="btn-bg__grey">SUBMIT</button>
+                        <button id="quiz-next" class="btn-bg__green">NEXT QUIZ</button>
+                    </div>
+                </div>
+                <!-- QUIZ RESULT -->
+                <div id="quiz-result">
+
+                </div>
+            </div>
+        </div>
     </div>
-    </main>
+
     <!-- 3. TIMEZONE MAP -->
     <!-- <dialog id="timezonemap" open class="map_hide">
             <div class="close_button"><input type="button">
@@ -67,17 +96,11 @@
             </div>
             <img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture" alt="timezone map">
         </dialog> -->
-    <!-- 4. QUIZ -->
-    <dialog>
-
-    </dialog>
 
     <!-- Message-->
     <dialog>
-        < </dialog>
-
-            </div>
-
+    </dialog>
+    </div>
 </body>
 <script type="module" src="./index.js" defer></script>
 
