@@ -104,22 +104,15 @@ def getUser(name):
 @app.route('/newgame')
 def newGame():
     # Fetch the list of large airports from DB
-    sql = "SELECT name, latitude_deg, longitude_deg FROM airport WHERE type='large_airport'"
-    cursor = config.connection.cursor()
-    cursor.execute(sql)
-    results = cursor.fetchall()
-    if cursor.rowcount > 0:
-        # Generate user's initial airport
-        airports = random.choice(results)
-        initial_airport = airports[0]
-        latitude = airports[1]
-        longitude = airports[2]
-        #goal_time = Goal().generate_goal(longitude, latitude)
+        game = Game()
+        goal = Goal()
+        goal_time = goal.generate_goal((game.current_location['latitude'], game.current_location['longitude']))
+        print(goal_time)
         response = {
-                "initial airport": initial_airport,
+                "initial airport": game.current_location,
                 "co2 budget": config.default_co2,
                 "co2 benefit": "get from js",
-                "goal time": "8.00"
+                "goal time": goal_time
         }
         return response
 

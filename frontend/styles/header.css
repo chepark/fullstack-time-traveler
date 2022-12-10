@@ -1,0 +1,45 @@
+header{
+  max-width: 1200px;
+  height: 15vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  gap: 1rem;
+}
+.logo{
+    width: 60vw;
+    align-items:center;
+    display:flex;
+}
+
+header_title{
+    width: 40vw;
+}
+.header_picture img{
+    width: 15vw;
+    height: 10vw;
+}
+
+.textarea_container{
+    width: 25vw;
+    height: 3vw;
+    align-items:center;
+    display:flex;
+    border-color: #58db8f;
+    border-style : solid;
+    border-radius: 16px;
+}
+.textarea_container textarea{
+    width: 12vw;
+    height: 2vw;
+    border : none;
+}
+.textarea_container button {
+    position: relative;
+    width: 6vw;
+    height: 2vw;
+    background-color:#58db8f;
+    border-radius: 16px;
+    border-color:azure;
+}
