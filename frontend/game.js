@@ -93,4 +93,3 @@ function changeColor(){
 function noHoverColor(){
   svgImage.style.fill = '#e7f4e9';
 }
-git
