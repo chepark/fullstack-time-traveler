@@ -97,3 +97,4 @@ function noHoverColor(){
   helpText.style.color = '#8bcca6';
 
 }
+
