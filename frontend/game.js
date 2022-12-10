@@ -78,4 +78,19 @@ updateGoalTime('4:30');
 updateGuideLocation('Helsinki Airport', 'Finland', '6:30');
 updateGuideGoal('4:30');
 
+//Help button color change on hover
+const svgImage = document.getElementById('svgButton');
 
+helpButton.addEventListener("mouseover", ()=>{
+  changeColor();
+});
+helpButton.addEventListener("mouseout", ()=>{
+  noHoverColor();
+})
+function changeColor(){
+  svgImage.style.fill = '#58db8f';
+};
+function noHoverColor(){
+  svgImage.style.fill = '#e7f4e9';
+}
+git

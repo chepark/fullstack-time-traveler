@@ -22,7 +22,13 @@
 }
 
 #helpButton:hover {
+    cursor: pointer;
+    transform: scale(1.1);
     text-color: var(--green);
+}
+
+#svgButton{
+    fill: var(--lightGreen);
 }
 #svgButton:hover {
     fill: var(--green);
@@ -30,7 +36,7 @@
 
 .helpButtonText{
     position: absolute;
-    color:black;
+    color: var(--green);
     bottom: -23px;
     left: 28px;
     margin: 1px;
