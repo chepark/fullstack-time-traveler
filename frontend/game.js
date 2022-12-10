@@ -39,7 +39,7 @@ function closeMap() {
 //CO2 INDICATOR
 
 // function to update CO2 indicator
-function updateCO2(CO2budget, CO2left) { //change to status? line 38 example code
+function updateCO2(CO2budget, CO2left) {
   let percentCalculator = (CO2left*100)/CO2budget;
   let percentCO2Left = percentCalculator.toString() +'%';
   document.getElementById('budget').innerHTML = CO2left+ ' of ' + CO2budget + ' CO2 Budget';
@@ -47,7 +47,7 @@ function updateCO2(CO2budget, CO2left) { //change to status? line 38 example cod
 }
 
 //function to update current time in the right panel
-function updateCurrentTime(currentLocation, currentTime){//change to status?
+function updateCurrentTime(currentLocation, currentTime){
   let value = document.getElementById('currentTime');
   value.innerHTML = currentLocation + ' Current time <br><br>' + currentTime;
 }
@@ -55,19 +55,19 @@ function updateCurrentTime(currentLocation, currentTime){//change to status?
 //function to update goal time in the right panel
 function updateGoalTime(goalTime){
   let gtime = document.getElementById('goalTime');
-  gtime.innerHTML = 'Goal time <br><br>' + goalTime;
+  gtime.innerHTML = 'Goal Time <br><br>' + goalTime;
 }
 
 //functions to update guide messages
 function updateGuideLocation(currentAirport, currentCountry, currentTime){
   let location = document.getElementById('timeTravelerLocation');
-  location.innerHTML = `Time Traveler: You are now in ${currentAirport} in ${currentCountry}. Local time is ${currentTime}.`
+  location.innerHTML = `Time Traveler: <br>You are now in ${currentAirport} in ${currentCountry}. Local time is ${currentTime}.`
 
 }
 
 function updateGuideGoal(goalTime) {
   let timeToFind = document.getElementById('timeTravelerGoal');
-  timeToFind.innerHTML = `Time Traveler: Please find the airport located in the goal time zone. The goal time is ${goalTime}.`
+  timeToFind.innerHTML = `Time Traveler: <br>Please find the airport located in the goal time zone. The goal time is ${goalTime}.`
 }
 
 
@@ -80,6 +80,7 @@ updateGuideGoal('4:30');
 
 //Help button color change on hover
 const svgImage = document.getElementById('svgButton');
+const helpText =document.getElementById('helpButtonText');
 
 helpButton.addEventListener("mouseover", ()=>{
   changeColor();
@@ -89,8 +90,10 @@ helpButton.addEventListener("mouseout", ()=>{
 })
 function changeColor(){
   svgImage.style.fill = '#58db8f';
+  helpText.style.color = '#58db8f';
 };
 function noHoverColor(){
-  svgImage.style.fill = '#e7f4e9';
+  svgImage.style.fill = '#8bcca6';
+  helpText.style.color = '#8bcca6';
+
 }
-git

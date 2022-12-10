@@ -23,24 +23,26 @@
 
 #helpButton:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.05);
     text-color: var(--green);
+    transition-duration: 300ms;
 }
 
 #svgButton{
-    fill: var(--lightGreen);
+    fill: #8bcca6;
 }
 #svgButton:hover {
     fill: var(--green);
+    transition-duration: 300ms;
 }
 
-.helpButtonText{
+#helpButtonText{
     position: absolute;
-    color: var(--green);
     bottom: -23px;
     left: 28px;
     margin: 1px;
     font-size:11px;
+    color: #8bcca6;
 }
 
 #timezoneMap{
