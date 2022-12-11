@@ -39,6 +39,10 @@ export const addMapMarkers = (airports) => {
       if (confirm(`Do you want to fly to ${airport.name}`)) {
         changeGourpColor(blueIcon);
         this.setIcon(greenIcon);
+
+        //transform airport name
+        // fetch result
+        // display message
       } else {
         txt = "You pressed Cancel!";
       }
@@ -109,7 +113,7 @@ function updateGuideGoal(goalTime) {
 }
 
 //TESTING VALUES
-updateCO2(5000, 2000);
+updateCO2(5000, 5000);
 updateCurrentTime("Helsinki Airport", "6:30");
 updateGoalTime("4:30");
 updateGuideLocation("Helsinki Airport", "Finland", "6:30");
@@ -122,13 +126,16 @@ const helpText = document.getElementById("helpButtonText");
 helpButton.addEventListener("mouseover", () => {
   changeColor();
 });
+
 helpButton.addEventListener("mouseout", () => {
   noHoverColor();
 });
+
 function changeColor() {
   svgImage.style.fill = "#58db8f";
   helpText.style.color = "#58db8f";
 }
+
 function noHoverColor() {
   svgImage.style.fill = "#8bcca6";
   helpText.style.color = "#8bcca6";

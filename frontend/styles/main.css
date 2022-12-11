@@ -5,6 +5,7 @@
 @import "./timezone.css";
 @import "./header.css";
 @import "./message.css";
+
 #game {
   max-width: 1200px;
 }
