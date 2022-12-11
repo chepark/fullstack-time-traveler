@@ -15,8 +15,17 @@ class User():
 
         # if user exist, return user's name and user's highest score
         if result[0] != None:
-            gameId = result[0]
-            name = result[1]
+            # create new game table
+            create_game = "INSERT INTO game (userName) VALUES ('" + name + "')"
+            cursor = config.connection.cursor()
+            cursor.execute(create_game)
+            config.connection.commit()
+
+            get_gameId = "SELECT LAST_INSERT_ID()"
+            cursor = config.connection.cursor()
+            cursor.execute(get_gameId)
+
+            gameId = cursor.fetchone()[0]
             max_score = result[2]
             data = {
                 "is_new_user": False,
@@ -41,7 +50,6 @@ class User():
             data = {
                     "is_new_user": True,
                     "game_id": gameId,
-                    "name": name,
                     "max_score": None, 
                     }
             
