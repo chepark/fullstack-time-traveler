@@ -156,6 +156,25 @@ def draw_result():
 
 # URL: http://127.0.0.1:5000/newgoal?&gameId=15&current_location=Jorge%20Newbery%20Airpark
 @app.route('/newgoal')
+
+def generate_new_goal():
+    game = Game("name", "current_loc")
+    goal = Goal()
+    current_loc = {"name", 'longitude', 'latitude'}
+    game.get_coordinate = current_loc['name']
+    current_loc = {"Helsinki Airport", "", ""}
+
+    args = request.args
+    gameid = args.get("gameid")
+    current_loc = args.get("current_loc")
+    goal.get_time(goal.current_loc['latitude'], goal.current_loc['longitude'])
+
+    data = {"time": goal.time}
+    response = {"data": data, "status": 200}
+    return response
+
+
+# create new goal with game.generate_goal
 def generate_new_goal():
     args = request.args
     gameId = args.get("gameId")
@@ -171,11 +190,8 @@ def generate_new_goal():
 
     # 2. generate new goal
     goal.generate_goal(longitude, latitude)
-
     # 3. save new goal in db
     goal.update_goal_time(gameId)
-
-    
     # 4. send data (current time, new goal)
     data = {"new_goal": goal.time}
     response = {"data": data, "status": 200}

@@ -43,36 +43,50 @@
                 <!-- MAP -->
                 <div id="map">
                     <!-- HELP BUTTON -->
-                    <div class="btn-help"></div>
+                    <div class="btn-help">
+                        <button id="helpButton">
+                            <svg id="svgButton" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                viewBox="0 0 49.78 49.774">
+                                <path id="help-rhombus" d="M26.888,2a4.983,4.983,0,0,0-3.509,1.468L3.472,23.375a4.912,4.912,
+                                0,0,0,0,7.017L23.379,50.3a4.912,4.912,0,0,0,7.017,0L50.3,30.392a4.912,4.912,0,0,0,0-7.017L30.4,
+                                3.468A4.983,4.983,0,0,0,26.888,2m0,12.317c6.719.274,9.63,7.042,5.674,12.094-1.045,1.244-2.712,
+                                2.065-3.558,3.135a5.207,5.207,0,0,0-.871,3.558H24.4c0-2.115,0-3.882.871-5.126.821-1.244,
+                                2.488-1.991,3.534-2.812,3.061-2.812,2.264-6.768-1.916-7.092a3.749,3.749,0,0,0-3.733,
+                                3.757H19.422a7.5,7.5,0,0,1,7.465-7.515M24.4,35.593h3.733v3.733H24.4Z"
+                                    transform="translate(-1.997 -2)" />
+                            </svg>
+                            <p id="helpButtonText">Help</p>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="panel panel-right">
                 <!-- CO2 BUDGET -->
-                <div class="indicator indicator-co2">
-                    <h3>Budget</h3>
+                <div class="indicator-co2">
+                    <h5 id="budget"></h5>
                     <div class="full_budget_container">
-                        <div class="co2-container"></div>
+                        <div id="co2-container"></div>
                     </div>
                 </div>
                 <!-- TIME -->
                 <ul class="indicator indicator-time">
                     <li class="time time-current">
-                        <h3>Current time</h3>
+                        <h5 id="currentTime"></h5>
                     </li>
                     <li class="time time-goal">
-                        <h3>Goal time</h3>
+                        <h5 id="goalTime"></h5>
                     </li>
                 </ul>
                 <!-- GUIDE -->
                 <div class="guide">
-                    <h3>Guide</h3>
+                    <h5>Guide</h5>
                     <div class="guide_messages">
-                        <p>Time traveler:</p>
+                        <p id="timeTravelHelp">Time Traveler: <br>If you need help. Click the Help button in the left
+                            bottom corner of the map.</p>
+                        <p id="timeTravelerLocation"></p>
+                        <p id="timeTravelerGoal"></p>
                     </div>
-
                 </div>
-
-
             </div>
         </main>
         <!-- QUIZ -->
@@ -106,17 +120,14 @@
     </div>
 
     <!-- 3. TIMEZONE MAP -->
-    <!-- <dialog id="timezonemap" open class="map_hide">
-            <div class="close_button"><input type="button">
-                <p class="close">&times;</p>
-            </div>
-            <img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture" alt="timezone map">
-        </dialog> -->
-
-    <!-- Message-->
-    <dialog>
+    <dialog id="timezoneMap">
+        <button id="closeButton"></button>
+        <div class="map_container "><img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture"
+                alt="timezone map">
+        </div>
     </dialog>
-    </div>
+
+
 </body>
 <script type="module" src="./index.js" defer></script>
 

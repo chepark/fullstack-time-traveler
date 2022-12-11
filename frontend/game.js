@@ -10,40 +10,120 @@ export const displayMap = () => {
   map.setView([60, 24], 7);
 };
 var popup = L.popup(); // show pop up
-const blueIcon = L.divIcon({ className: 'blue-icon' });
-const greenIcon = L.divIcon({ className: 'green-icon' });
+const blueIcon = L.divIcon({ className: "blue-icon" });
+const greenIcon = L.divIcon({ className: "green-icon" });
 
 const airportMarkers = L.featureGroup().addTo(map);
 airportMarkers.clearLayers();
 
 export const addMapMarkers = (airports) => {
   airports.map((airport) => {
-    const marker = L.marker([airport.latitude, airport.longitude]).addTo(map).setIcon(blueIcon).bindPopup(`<b>${airport.name}</b>`);
-    marker.on('mouseover', function (e) {
-        this.openPopup();
+    const marker = L.marker([airport.latitude, airport.longitude])
+      .addTo(map)
+      .setIcon(blueIcon)
+      .bindPopup(`<b>${airport.name}</b>`);
+    marker.on("mouseover", function (e) {
+      this.openPopup();
     });
-    marker.on('mouseout', function (e) {
-        this.closePopup();
+    marker.on("mouseout", function (e) {
+      this.closePopup();
     });
-    marker.on('click', function(e) {
-        if (confirm(`Do you want to fly to ${airport.name}`)){
-            //alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);
-          
-            changeGourpColor(blueIcon)
-            this.setIcon(greenIcon);
-        } else {
-            txt = "You pressed Cancel!";
-        }
+    marker.on("click", function (e) {
+      if (confirm(`Do you want to fly to ${airport.name}`)) {
+        //alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);
+
+        changeGourpColor(blueIcon);
+        this.setIcon(greenIcon);
+      } else {
+        txt = "You pressed Cancel!";
+      }
     });
     airportMarkers.addLayer(marker);
   });
 };
 
 function changeGourpColor(colorIcon) {
-    airportMarkers.eachLayer(function (layer) {
-        layer.setIcon(colorIcon);
-    });
+  airportMarkers.eachLayer(function (layer) {
+    layer.setIcon(colorIcon);
+  });
 }
 
+//TIMEZONE MAP AND HELP BUTTON
+let helpButton = document.getElementById("helpButton");
+let timezonemap = document.getElementById("timezoneMap");
+let closeButton = document.getElementById("closeButton");
 
+helpButton.addEventListener("click", () => {
+  showMap();
+});
 
+closeButton.addEventListener("click", () => {
+  closeMap();
+});
+
+function showMap() {
+  timezonemap.show();
+}
+
+function closeMap() {
+  timezonemap.close();
+}
+//CO2 INDICATOR
+
+// function to update CO2 indicator
+function updateCO2(CO2budget, CO2left) {
+  let percentCalculator = (CO2left * 100) / CO2budget;
+  let percentCO2Left = percentCalculator.toString() + "%";
+  document.getElementById("budget").innerHTML =
+    CO2left + " of " + CO2budget + " CO2 Budget";
+  document.getElementById("co2-container").style.width = percentCO2Left;
+}
+
+//function to update current time in the right panel
+function updateCurrentTime(currentLocation, currentTime) {
+  let value = document.getElementById("currentTime");
+  value.innerHTML = currentLocation + " Current time <br><br>" + currentTime;
+}
+
+//function to update goal time in the right panel
+function updateGoalTime(goalTime) {
+  let gtime = document.getElementById("goalTime");
+  gtime.innerHTML = "Goal Time <br><br>" + goalTime;
+}
+
+//functions to update guide messages
+function updateGuideLocation(currentAirport, currentCountry, currentTime) {
+  let location = document.getElementById("timeTravelerLocation");
+  location.innerHTML = `Time Traveler: <br>You are now in ${currentAirport} in ${currentCountry}. Local time is ${currentTime}.`;
+}
+
+function updateGuideGoal(goalTime) {
+  let timeToFind = document.getElementById("timeTravelerGoal");
+  timeToFind.innerHTML = `Time Traveler: <br>Please find the airport located in the goal time zone. The goal time is ${goalTime}.`;
+}
+
+//TESTING VALUES
+updateCO2(5000, 2000);
+updateCurrentTime("Helsinki Airport", "6:30");
+updateGoalTime("4:30");
+updateGuideLocation("Helsinki Airport", "Finland", "6:30");
+updateGuideGoal("4:30");
+
+//Help button color change on hover
+const svgImage = document.getElementById("svgButton");
+const helpText = document.getElementById("helpButtonText");
+
+helpButton.addEventListener("mouseover", () => {
+  changeColor();
+});
+helpButton.addEventListener("mouseout", () => {
+  noHoverColor();
+});
+function changeColor() {
+  svgImage.style.fill = "#58db8f";
+  helpText.style.color = "#58db8f";
+}
+function noHoverColor() {
+  svgImage.style.fill = "#8bcca6";
+  helpText.style.color = "#8bcca6";
+}

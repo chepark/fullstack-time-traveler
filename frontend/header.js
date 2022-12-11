@@ -15,7 +15,6 @@ nameSubmitBtn.addEventListener("click", async (e) => {
   // check user name exists
   if (!userName) {
     // show alert message
-
     alertMessage.style.display = "block";
     setTimeout(() => {
       alertMessage.style.display = "none";
@@ -30,15 +29,15 @@ nameSubmitBtn.addEventListener("click", async (e) => {
 
   console.log(Game.gameId);
 
-  // Turn off name input field.
+  // turn off name input field.
   inputContainer.style.display = "none";
 
-  // Display greeting
+  // display greeting
   userNameDisplay.textContent = `${Game.userName}`;
 
   // open quiz model
   quizModal.style.display = "block";
-
+  // display greeting on quiz modal
   const greeting = document.getElementById("greeting");
   greeting.textContent = `Hello, ${Game.userName}!`;
 });
