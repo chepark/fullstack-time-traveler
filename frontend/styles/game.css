@@ -9,6 +9,14 @@
   gap: 1rem;
 }
 
+/* HEADER */
+
+/* HEADER */
+.panel-left,
+.panel-right {
+  border: 1px solid black;
+}
+
 .panel-left {
   width: 60vw;
 }
@@ -120,4 +128,15 @@ ul {
   object-fit: contain;
   padding: 0.1rem;
   border: thick #1f1f1f;
+}
+.blue-icon {
+  background-color: #2474ff;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.5);
+}
+
+.green-icon {
+  background-color: #27ba35;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.5);
 }
