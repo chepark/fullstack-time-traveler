@@ -1,7 +1,8 @@
 import quizData from "./data/quiz.json" assert { type: "json" };
+import { red, green } from "./utils.js";
 
 // All logics regarding quiz
-const quizModal = document.getElementById("quiz-modal");
+export const quizModal = document.getElementById("quiz-modal");
 const quizPermission = document.getElementById("quiz-permission");
 const quiz = document.getElementById("quiz");
 const quizResult = document.getElementById("quiz-result");
@@ -15,8 +16,8 @@ let quizCounter = 0;
 let correctAnswers = 0;
 let userChoice;
 
-const red = "#e2393e";
-const green = "#58db8f";
+// const red = "#e2393e";
+// const green = "#58db8f";
 
 const handleReject = () => {
   quizModal.style.display = "none";

@@ -15,27 +15,27 @@
 
 <body>
     <div class="container">
-        <!-- 1.HEADER -->
-     <header>
+        <!-- HEADER -->
+        <header>
+            <div class="logo">
+                <div class="header_picture">
+                    <img src="/frontend/assets/img/aircraft.svg" alt="logo">
+                </div>
+                <div class="header_title text-main__normal">
+                    <h2>Time Traveler</h2>
+                </div>
 
-        <div class="logo">
-            <div class="header_picture">
-                <img src="/frontend/assets/img/aircraft.svg" alt="">
             </div>
-            <div class="header_title">
-                <h2>Time Traveler</h2>
+            <div class="input-userName">
+                <div class="textarea_container">
+                    <input id="userName" name="userName" type="text" placeholder="Enter your name"></input>
+                    <button class="btn__green" id="name-submit" type="submit">SUBMIT</button>
+                </div>
+                <div class="alert">Should NOT be Empty.</div>
+                <div id="user-profile" class="text-main text-main__normal"></div>
             </div>
-
-        </div>
-        <div class="textarea_container">
-            <textarea name="" placeholder="Enter your name"></textarea>
-            <button>SUBMIT</button>
-
-        </div>
-
-
-    </header>
-        <!-- 2. GAME -->
+        </header>
+        <!-- GAME -->
         <!-- 2.1. embedding interactive map -->
         <!-- 2.2. game logics -->
         <main id="game">
@@ -80,7 +80,7 @@
             <div class="modal-container container-quiz">
                 <!-- QUIZ PERMISSION -->
                 <div id="quiz-permission" class="modal-content">
-                    <div class="text-main text-main__large">Hello David!</div>
+                    <div id="greeting" class="text-main text-main__large"></div>
                     <div class="text-main text-main__medium">Do you want to take a quiz <br>and get a low-emission
                         flight?
                     </div>

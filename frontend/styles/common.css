@@ -64,6 +64,15 @@ button {
   font-family: Roboto;
 }
 
+input {
+  border: none;
+  font-family: var(--sub-font);
+}
+
+input:focus {
+  outline: none;
+}
+
 .text-main {
   font-family: var(--main-font);
 }
@@ -86,6 +95,10 @@ button {
 
 .text-yellow {
   color: var(--yellow);
+}
+
+.text-green {
+  color: var(--green);
 }
 
 button {
