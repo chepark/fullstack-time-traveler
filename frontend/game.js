@@ -1,3 +1,6 @@
+import { fetchAllAirports, fetchNewGame } from "./api.js";
+import { Game } from "./utils.js";
+
 // Init the map
 const map = L.map("map", { tap: false });
 
@@ -7,9 +10,10 @@ export const displayMap = () => {
     subdomains: ["mt0", "mt1", "mt2", "mt3"],
   }).addTo(map);
 
-  map.setView([60, 24], 7);
+  map.setView([60, 25], 7);
 };
-var popup = L.popup(); // show pop up
+
+// const popup = L.popup(); // show pop up
 const blueIcon = L.divIcon({ className: "blue-icon" });
 const greenIcon = L.divIcon({ className: "green-icon" });
 
@@ -22,22 +26,24 @@ export const addMapMarkers = (airports) => {
       .addTo(map)
       .setIcon(blueIcon)
       .bindPopup(`<b>${airport.name}</b>`);
+
     marker.on("mouseover", function (e) {
       this.openPopup();
     });
+
     marker.on("mouseout", function (e) {
       this.closePopup();
     });
+
     marker.on("click", function (e) {
       if (confirm(`Do you want to fly to ${airport.name}`)) {
-        //alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);
-
         changeGourpColor(blueIcon);
         this.setIcon(greenIcon);
       } else {
         txt = "You pressed Cancel!";
       }
     });
+
     airportMarkers.addLayer(marker);
   });
 };
@@ -68,8 +74,8 @@ function showMap() {
 function closeMap() {
   timezonemap.close();
 }
-//CO2 INDICATOR
 
+//CO2 INDICATOR
 // function to update CO2 indicator
 function updateCO2(CO2budget, CO2left) {
   let percentCalculator = (CO2left * 100) / CO2budget;
@@ -82,7 +88,7 @@ function updateCO2(CO2budget, CO2left) {
 //function to update current time in the right panel
 function updateCurrentTime(currentLocation, currentTime) {
   let value = document.getElementById("currentTime");
-  value.innerHTML = currentLocation + " Current time <br><br>" + currentTime;
+  value.innerHTML = currentLocation + "<br>Current time <br><br>" + currentTime;
 }
 
 //function to update goal time in the right panel
@@ -127,3 +133,25 @@ function noHoverColor() {
   svgImage.style.fill = "#8bcca6";
   helpText.style.color = "#8bcca6";
 }
+
+export const setupNewGame = async () => {
+  // fetch data
+  const airports = await fetchAllAirports();
+  const data = await fetchNewGame(Game.gameId, Game.co2benefit);
+
+  // setup data on frontend
+  Game.setGameData(data);
+
+  // draw map
+  addMapMarkers(airports);
+  map.setView([Game.currentLatitude, Game.currentLongitude], 14);
+
+  console.log(Game.currentLongitude, Game.currentLatitude);
+
+  // setup frontend
+  updateCO2(Game.co2budget, Game.co2left);
+  updateCurrentTime(Game.currentAirport, Game.currentTime);
+  updateGoalTime(Game.goalTime);
+  updateGuideLocation(Game.currentAirport, "Finland", Game.currentTime);
+  updateGuideGoal(Game.goalTime);
+};

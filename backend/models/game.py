@@ -110,7 +110,8 @@ class Game:
     
     # generate random airport to start game
     def set_random_airport(self):
-        sql = "SELECT name, latitude_deg, longitude_deg FROM airport WHERE type='large_airport'"   
+        # ! add function to find country
+        sql = "SELECT name, latitude_deg, longitude_deg, iso_country FROM airport WHERE type='large_airport'"   
         cursor = config.connection.cursor()
         cursor.execute(sql)
         results = cursor.fetchall()
@@ -122,6 +123,8 @@ class Game:
             self.current_location['name'] = initial_airport
             # update current location coordinate
             self.get_coordinate(initial_airport, 'current')
+
+
 
 
     ### SETTERS ###

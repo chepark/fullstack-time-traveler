@@ -10,36 +10,37 @@
 }
 
 /* HEADER */
-
-/* HEADER */
-.panel-left,
-.panel-right {
-  border: 1px solid black;
-}
-
 .panel-left {
   width: 60vw;
+  border-radius: 16px;
 }
 
 .panel-right {
   width: 25vw;
+
   display: grid;
-  grid-template-rows: 1fr 1fr 2fr;
+  grid-template-rows: auto auto 2fr;
+
+  margin-bottom: 0;
+
+  border-radius: 6px;
 }
 
 /* INTERACTIVE MAP */
 #map {
   height: 100%;
 }
-/* RIGHT GAME PANEL */
 
+/* RIGHT GAME PANEL */
 .indicator-co2 {
   padding: 0rem 1rem 1rem 1rem;
-  margin: 0.3rem;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
   border-radius: 16px;
   background: #ffffff;
-  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 3px 9px 3px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3); */
 }
 
 .indicator-co2:hover {
@@ -68,10 +69,7 @@ ul {
   list-style-type: none;
   padding: 0;
 }
-.panel-right {
-  border-radius: 6px;
-  margin-bottom: 1rem;
-}
+
 .time:hover {
   transform: scale(1.025);
   transition-duration: 300ms;
@@ -89,24 +87,31 @@ ul {
   padding: 0.3rem;
   margin: 0.3rem;
   background: #ffffff;
-  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 3px 9px 3px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3); */
 }
+
 .time-goal {
   color: var(--green);
 }
+
 .guide {
   text-align: left;
   padding: 1rem;
-  margin: 0.3rem;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
   background: #ffffff;
-  box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 3px 9px 3px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3); */
   border-radius: 20px;
 }
+
 .guide h5 {
   margin: auto;
 }
+
 .guide_messages {
   text-align: left;
   font-size: small;

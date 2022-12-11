@@ -1,14 +1,11 @@
 import quizData from "./data/quiz.json" assert { type: "json" };
-import { red, green } from "./utils.js";
-import { fetchAllAirports } from "./api.js";
-import { addMapMarkers } from "./game.js";
+import { red, green, Game } from "./utils.js";
+import { setupNewGame } from "./game.js";
 
 // All logics regarding quiz
 export const quizModal = document.getElementById("quiz-modal");
 const quizPermission = document.getElementById("quiz-permission");
 const quiz = document.getElementById("quiz");
-const quizResult = document.getElementById("quiz-result");
-const closeBtn = document.querySelector(".modal-close");
 const rejectBtn = document.getElementById("reject-quiz");
 const startBtn = document.getElementById("try-quiz");
 
@@ -179,12 +176,11 @@ const handleStartGame = () => {
   const startBtn = document.getElementById("start-game");
 
   startBtn.addEventListener("click", async () => {
-    console.log("start click");
+    Game.setCo2Benefit(correctAnswers);
     quizModal.style.display = "none";
 
     // fetchNewGame
-    const airports = await fetchAllAirports();
-    addMapMarkers(airports);
+    await setupNewGame();
   });
 };
 
