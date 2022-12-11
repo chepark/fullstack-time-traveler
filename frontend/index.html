@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
     <!-- LEAFLET STYLES -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
     <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="message.js">
     <!-- LEAFLET SCRIPT -->
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" defer></script>
     <title>Time Traveler</title>
@@ -116,16 +117,24 @@
             </div>
         </div>
     </div>
+    </main>
 
-    <!-- 3. TIMEZONE MAP -->
-    <dialog id="timezoneMap">
-        <button id="closeButton"></button>
-        <div class="map_container "><img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture"
-                alt="timezone map">
+    <dialog>
+        <!-- TIMEZONE MAP -->
+        <dialog id="timezoneMap">
+            <button id="closeButton"></button>
+            <div class="map_container "><img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture"
+                    alt="timezone map">
+            </div>
+        </dialog>
+
+        <!-- Message-->
+        <dialog class="popup" id="popup">
+            <h4 id="popupMessage"></h4>
+            <button class="messageButton" type="button" id="leftButton"></button>
+            <button class="messageButton" type="button" id="rightButton"></button>
+        </dialog>
         </div>
-    </dialog>
-
-
 </body>
 <script type="module" src="./index.js" defer></script>
 
