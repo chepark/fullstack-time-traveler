@@ -1,5 +1,7 @@
 import quizData from "./data/quiz.json" assert { type: "json" };
 import { red, green } from "./utils.js";
+import { fetchAllAirports } from "./api.js";
+import { addMapMarkers } from "./game.js";
 
 // All logics regarding quiz
 export const quizModal = document.getElementById("quiz-modal");
@@ -176,11 +178,13 @@ const handleStartGame = () => {
   const quizResult = document.getElementById("quiz-result");
   const startBtn = document.getElementById("start-game");
 
-  startBtn.addEventListener("click", () => {
+  startBtn.addEventListener("click", async () => {
     console.log("start click");
     quizModal.style.display = "none";
 
-    // ! fetchNewGame
+    // fetchNewGame
+    const airports = await fetchAllAirports();
+    addMapMarkers(airports);
   });
 };
 
