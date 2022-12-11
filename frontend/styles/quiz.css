@@ -6,6 +6,11 @@
   width: 100%;
 }
 
+#quiz-permission {
+  /* temporary.  remove it after dev */
+  display: block;
+}
+
 .quiz-status {
   margin-bottom: 1rem;
   font-size: 12px;
@@ -142,4 +147,15 @@
 #quiz-result {
   /* toggle */
   display: none;
+}
+
+.confetti {
+  display: inline-block;
+  height: 120px;
+}
+
+#quiz-result button {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }

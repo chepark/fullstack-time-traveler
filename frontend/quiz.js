@@ -4,6 +4,7 @@ import quizData from "./data/quiz.json" assert { type: "json" };
 const quizModal = document.getElementById("quiz-modal");
 const quizPermission = document.getElementById("quiz-permission");
 const quiz = document.getElementById("quiz");
+const quizResult = document.getElementById("quiz-result");
 const closeBtn = document.querySelector(".modal-close");
 const rejectBtn = document.getElementById("reject-quiz");
 const startBtn = document.getElementById("try-quiz");
@@ -145,9 +146,40 @@ const handleNextQuiz = () => {
   nextBtn.addEventListener("click", () => {
     if (quizCounter < 5) runQuiz();
     else {
-      console.log("show result");
-      console.log("correct answer counter", correctAnswers);
+      displayResult();
+      handleStartGame();
     }
+  });
+};
+
+const displayResult = () => {
+  // Turn off quiz
+  quiz.style.display = "none";
+
+  const quizResult = document.getElementById("quiz-result");
+  quizResult.style.display = "block";
+  quizResult.innerHTML = `
+  <div class="modal-content">
+      <div class="text-main text-main__medium">
+          Congratulations!
+      </div>
+      <img class="confetti" src="./assets/img/confetti.svg" alt="confetti">
+      <div id="quiz-score" class="text-main text-main__normal">You've got ${correctAnswers} points out of 5.</div>
+      <div class="text-main text-main__normal text-yellow">You earned a low-emission flight.</div>
+      <button id="start-game" class="btn__green">START GAME</button>
+  </div>
+  `;
+};
+
+const handleStartGame = () => {
+  const quizResult = document.getElementById("quiz-result");
+  const startBtn = document.getElementById("start-game");
+
+  startBtn.addEventListener("click", () => {
+    console.log("start click");
+    quizModal.style.display = "none";
+
+    // ! fetchNewGame
   });
 };
 
@@ -161,5 +193,4 @@ startBtn.addEventListener("click", () => {
   formatQuizInHtml();
 
   runQuiz();
-  // handleNextQuiz();
 });

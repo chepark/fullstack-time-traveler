@@ -29,6 +29,7 @@ ex) div {
 :root {
   --green: #58db8f;
   --lightGreen: #e7f4e9;
+  --yellow: #fec12f;
   --red: #e2393e;
   --lightGray: #f5f5f5;
   --bgColor: #fafcfe;
@@ -81,6 +82,10 @@ button {
 
 .text-sub {
   font-family: var(--sub-font);
+}
+
+.text-yellow {
+  color: var(--yellow);
 }
 
 button {
