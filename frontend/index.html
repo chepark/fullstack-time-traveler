@@ -33,7 +33,7 @@
             </div>
             <div class="panel panel-right">
                 <!-- CO2 BUDGET -->
-                 <div class="indicator indicator-co2">
+                <div class="indicator indicator-co2">
                     <h3>Budget</h3>
                     <div class="full_budget_container">
                         <div class="co2-container"></div>
@@ -58,33 +58,72 @@
                 </div>
 
 
-                </div>
             </div>
-        </main>
-        <!-- 3. TIMEZONE MAP -->
-        <dialog open class="map_hide">
-            <div class="close_button"><input  type="button">
-            <p class="close">&times;</p>
+    </main>
+    <!-- 3. TIMEZONE MAP -->
+    <!-- <dialog id="timezonemap" open class="map_hide">
+            <div class="close_button"><input type="button">
+                <p class="close">&times;</p>
             </div>
             <img src="/frontend/assets/img/timezonemap.png" class="timezonemap_picture" alt="timezone map">
-        </dialog>
-        <!-- 4. QUIZ -->
-        <dialog>
+        </dialog> -->
+    <!-- 4. QUIZ -->
+    <dialog>
 
-        </dialog>
-
-        <!-- Message-->
-    <dialog open class="popup" id="popup">
-            <h1>Congratulation</h1>
-           <img src="https://th.bing.com/th/id/R.4f217d352ae116656039058b27496607?rik=ul6O0wSC3s3z3w&riu=http%3a%2f%2fclipartmag.com%2fimages%2fcongrats-smiley-faces-19.jpg&ehk=tvHFi7EklCtwEo%2beSm5eh1l7YGDd2bsYSCOEIo7u%2fZk%3d&risl=&pid=ImgRaw&r=0=">
-            <p>You found the right timezone </p>
-            <button type="button" onclick="closePopup()"> Exit </button>
-            <button type="button" onclick="closePopup()"> Play next</button>
     </dialog>
+        <!-- Message-->
 
+    <dialog class="popup" id="popup">
+            <h4 id="popupMessage"></h4>
+            <button class="messageButton" type="button" id="leftButton"></button>
+            <button class="messageButton" type="button" id="rightButton"></button>
+    </dialog>
     </div>
-
 </body>
 <script type="module" src="./index.js" defer></script>
+<script>
+
+function closeMessage(){
+  popup.close()
+}
+
+function success(){
+  let message=document.getElementById('popupMessage');
+  let leftButton=document.getElementById('leftButton');
+  let rightButton=document.getElementById('rightButton');
+
+    message.innerHTML = `Congratulations! <br> You found a right timezones`
+    leftButton.innerHTML =`Exit`
+    rightButton.innerHTML=`Play next`
+
+    const popup= document.getElementById('popup');
+    popup.show();}
+success();
+function failure(){
+  const popup= document.getElementById('popup');
+    popup.show();
+  let message=document.getElementById('popupMessage');
+  let leftButton=document.getElementById('leftButton');
+  let rightButton=document.getElementById('rightButton');
+
+  message.innerHTML =`Oops!!! <br> You are in wrong timezones.`
+  leftButton.innerHTML = `Exit`
+  rightButton.innerHTML=`Try Again`
+}
+failure();
+gameOver()
+function gameOver(){
+  const popup= document.getElementById('popup');
+    popup.show();
+  let message=document.getElementById('popupMessage');
+  let leftButton=document.getElementById('leftButton');
+  let rightButton=document.getElementById('rightButton');
+
+  message.innerHTML =`Game over.<br>Your CO2 budget is over. `
+  leftButton.innerHTML = `Exit`
+  rightButton.innerHTML=`Try Again`
+}
+gameOver();
+</script>
 
 </html>
