@@ -1,5 +1,6 @@
 import quizData from "./data/quiz.json" assert { type: "json" };
-import { red, green, Game } from "./utils.js";
+import { red, green } from "./utils.js";
+import { Game } from "./classes.js";
 import { setupNewGame } from "./game.js";
 
 // All logics regarding quiz

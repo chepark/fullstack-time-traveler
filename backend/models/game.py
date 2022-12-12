@@ -16,8 +16,8 @@ class Game:
         self.co2_budget = config.default_co2budget
         self.co2_benefit = None
 
-        self.current_location = {'name': None, 'longitude': None, 'latitude': None}
-        self.new_location = {"name": None, 'longitude': None, 'latitude': None}
+        self.current_location = {'name': "", 'longitude': 0, 'latitude': 0}
+        self.new_location = {"name": "", 'longitude': 0, 'latitude': 0}
         
         self.current_time = {"time": None, "hour": None}
        
@@ -42,6 +42,7 @@ class Game:
 
     # get coordinate info of the location
     def get_coordinate(self, airport_name, target):
+        print('airportname', airport_name)
         sql = "SELECT name, latitude_deg, longitude_deg FROM Airport"
         sql += " WHERE name ='" + airport_name + "'"
 
@@ -68,8 +69,9 @@ class Game:
         response = requests.get(
             f'https://timeapi.io/api/Time/current/coordinate?latitude={airport_latitude}&longitude={airport_longitude}').json()
 
-        hour = (response["hour"])
-        min = (response["minute"])
+        print(response)
+        hour = response["hour"]
+        min = response["minute"]
         time = datetime.strptime(f"{hour}:{min}:00", "%H:%M:%S")
         time = time.time().strftime("%H:%M")
 

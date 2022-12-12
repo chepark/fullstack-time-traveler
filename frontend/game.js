@@ -1,5 +1,16 @@
-import { fetchAllAirports, fetchNewGame } from "./api.js";
-import { Game } from "./utils.js";
+import {
+  fetchAllAirports,
+  fetchNewGame,
+  getResult,
+  fetchNewGoal,
+} from "./api.js";
+import { Game } from "./classes.js";
+import {
+  closeMessage,
+  successMessage,
+  failureMessage,
+  gameOverMessage,
+} from "./message.js";
 
 // Init the map
 const map = L.map("map", { tap: false });
@@ -40,11 +51,10 @@ export const addMapMarkers = (airports) => {
         changeGourpColor(blueIcon);
         this.setIcon(greenIcon);
 
-        //transform airport name
-        // fetch result
-        // display message
+        // run game
+        runGame(airport.name);
       } else {
-        txt = "You pressed Cancel!";
+        return;
       }
     });
 
@@ -56,27 +66,6 @@ function changeGourpColor(colorIcon) {
   airportMarkers.eachLayer(function (layer) {
     layer.setIcon(colorIcon);
   });
-}
-
-//TIMEZONE MAP AND HELP BUTTON
-let helpButton = document.getElementById("helpButton");
-let timezonemap = document.getElementById("timezoneMap");
-let closeButton = document.getElementById("closeButton");
-
-helpButton.addEventListener("click", () => {
-  showMap();
-});
-
-closeButton.addEventListener("click", () => {
-  closeMap();
-});
-
-function showMap() {
-  timezonemap.show();
-}
-
-function closeMap() {
-  timezonemap.close();
 }
 
 //CO2 INDICATOR
@@ -96,7 +85,7 @@ function updateCurrentTime(currentLocation, currentTime) {
 }
 
 //function to update goal time in the right panel
-function updateGoalTime(goalTime) {
+export function updateGoalTime(goalTime) {
   let gtime = document.getElementById("goalTime");
   gtime.innerHTML = "Goal Time <br><br>" + goalTime;
 }
@@ -110,35 +99,6 @@ function updateGuideLocation(currentAirport, currentCountry, currentTime) {
 function updateGuideGoal(goalTime) {
   let timeToFind = document.getElementById("timeTravelerGoal");
   timeToFind.innerHTML = `Time Traveler: <br>Please find the airport located in the goal time zone. The goal time is ${goalTime}.`;
-}
-
-//TESTING VALUES
-updateCO2(5000, 5000);
-updateCurrentTime("Helsinki Airport", "6:30");
-updateGoalTime("4:30");
-updateGuideLocation("Helsinki Airport", "Finland", "6:30");
-updateGuideGoal("4:30");
-
-//Help button color change on hover
-const svgImage = document.getElementById("svgButton");
-const helpText = document.getElementById("helpButtonText");
-
-helpButton.addEventListener("mouseover", () => {
-  changeColor();
-});
-
-helpButton.addEventListener("mouseout", () => {
-  noHoverColor();
-});
-
-function changeColor() {
-  svgImage.style.fill = "#58db8f";
-  helpText.style.color = "#58db8f";
-}
-
-function noHoverColor() {
-  svgImage.style.fill = "#8bcca6";
-  helpText.style.color = "#8bcca6";
 }
 
 export const setupNewGame = async () => {
@@ -162,3 +122,43 @@ export const setupNewGame = async () => {
   updateGuideLocation(Game.currentAirport, "Finland", Game.currentTime);
   updateGuideGoal(Game.goalTime);
 };
+
+const runGame = async (airport) => {
+  // transform airport name
+  Game.setCurrerntAirport(airport);
+
+  // fetch result
+  const resultData = await getResult(Game.gameId, airport);
+  const { current_time, co2budget, success, game_over } = resultData;
+
+  // display message
+  Game.setCurrerntAirport(airport);
+  Game.setTime(current_time, "current");
+  Game.setCo2(co2budget, "co2left");
+  Game.setGameOver(game_over);
+
+  updateCO2(5000, Game.co2left);
+  updateCurrentTime(Game.currentAirport, Game.currentTime);
+
+  if (game_over) {
+    gameOverMessage();
+    return;
+  }
+
+  if (success) {
+    successMessage();
+  } else if (!success) {
+    failureMessage();
+  }
+
+  // if (game_over) {
+  //   gameOverMessage();
+  // }
+};
+
+//TESTING VALUES
+updateCO2(5000, 5000);
+updateCurrentTime("Helsinki Airport", "6:30");
+updateGoalTime("4:30");
+updateGuideLocation("Helsinki Airport", "Finland", "6:30");
+updateGuideGoal("4:30");

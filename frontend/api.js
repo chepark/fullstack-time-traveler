@@ -51,8 +51,9 @@ export const fetchNewGame = async (gameid, co2benefit) => {
 // Data: current_time, co2budget, success, game_over
 export const getResult = async (gameId, airportName) => {
   try {
-    const resultURL = `${BASE_URL}/result?gameId=${gameId}?airport_name=${airportName}`;
-    const response = await fetch(resultURL);
+    const resultURL = `${BASE_URL}/result?gameId=${gameId}&airport_name=${airportName}`;
+    const encodedURL = encodeURI(resultURL);
+    const response = await fetch(encodedURL);
     const { data } = await response.json();
     return data;
   } catch (error) {
@@ -64,8 +65,9 @@ export const getResult = async (gameId, airportName) => {
 // Data: new_goal
 export const fetchNewGoal = async (gameid, current_loc) => {
   try {
-    const newGoalURL = `${BASE_URL}/newgoal?gameid=${gameid}?current_loc=${current_loc}`;
-    const response = await fetch(newGoalURL);
+    const newGoalURL = `${BASE_URL}/newgoal?gameId=${gameid}&current_location=${current_loc}`;
+    const encodedURL = encodeURI(newGoalURL);
+    const response = await fetch(encodedURL);
     const { data } = await response.json();
 
     return data;

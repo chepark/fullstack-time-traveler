@@ -1,4 +1,4 @@
-import { Game, red, green } from "./utils.js";
+import { Game } from "./classes.js";
 import { getUser } from "./api.js";
 import { quizModal } from "./quiz.js";
 

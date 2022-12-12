@@ -6,6 +6,7 @@ from flask import Flask, request, Response, g
 from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
+from urllib.parse import unquote
 
 import config
 from models.game import Game
@@ -103,17 +104,19 @@ def newGame():
    
 
 
-# URL: http://127.0.0.1:5000/result?gameId=15&airport_name=Dublin%20Airport
+# URL: http://127.0.0.1:5000/result?gameId=15&airport_name=Honiara%20International&20Airport
 @app.route('/result')
-def draw_result():  
+def draw_result():
+     
     args = request.args
     gameId = args.get("gameId")
     new_location_name = args.get("airport_name")
-
+    print('gameId', gameId)
     game = Game()
 
     ### update location and co2 calculation ###
     # 1. update new locatioin coordinate
+    print('new LOC', new_location_name)
     game.new_location['name'] = new_location_name
     game.get_coordinate(new_location_name, 'new')
 
@@ -141,7 +144,7 @@ def draw_result():
     goal.get_goal(gameId)
 
     # 2. check achievement
-    goal.is_goal_reached(game.current_time['time'])
+    goal.is_goal_reached(game.current_time['hour'])
 
     # 3. prepare data for response
     success = goal.is_reached
@@ -154,31 +157,15 @@ def draw_result():
    
 
 
-# URL: http://127.0.0.1:5000/newgoal?&gameId=15&current_location=Jorge%20Newbery%20Airpark
+# URL: http://127.0.0.1:5000/newgoal?gameId=15&current_location=Jorge%20Newbery%20Airpark
 @app.route('/newgoal')
-
-def generate_new_goal():
-    game = Game("name", "current_loc")
-    goal = Goal()
-    current_loc = {"name", 'longitude', 'latitude'}
-    game.get_coordinate = current_loc['name']
-    current_loc = {"Helsinki Airport", "", ""}
-
-    args = request.args
-    gameid = args.get("gameid")
-    current_loc = args.get("current_loc")
-    goal.get_time(goal.current_loc['latitude'], goal.current_loc['longitude'])
-
-    data = {"time": goal.time}
-    response = {"data": data, "status": 200}
-    return response
-
-
-# create new goal with game.generate_goal
 def generate_new_goal():
     args = request.args
     gameId = args.get("gameId")
     user_selection = args.get("current_location")
+
+    print('args', gameId)
+    print('args', user_selection)
 
     game = Game()
     goal = Goal()

@@ -37,8 +37,8 @@ class Goal(Game):
 
 
     # checks if the goal time is reached and updates is_reached in goal.py
-    def is_goal_reached(self, current_time):
-        if self.time == current_time:
+    def is_goal_reached(self, current_hour):
+        if self.hour == current_hour:
             self.is_reached = True
         else:
             self.is_reached = False
