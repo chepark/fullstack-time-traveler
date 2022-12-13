@@ -150,10 +150,17 @@ const runGame = async (airport) => {
   } else if (!success) {
     failureMessage();
   }
+};
 
-  // if (game_over) {
-  //   gameOverMessage();
-  // }
+export const logOut = () => {
+  const userProfile = document.getElementById("user-profile");
+  const logIn = document.querySelector(".textarea_container");
+
+  // off user name
+  userProfile.style.display = "none";
+  // on user input
+  logIn.style.display = "block";
+  logIn.firstElementChild.value = "";
 };
 
 //TESTING VALUES

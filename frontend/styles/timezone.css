@@ -1,4 +1,3 @@
-/* 3. TIMEZONE MAP */
 .btn-help {
   z-index: 801;
   position: absolute;
@@ -107,6 +106,7 @@
   object-fit: contain;
   display: block;
   margin: auto;
+  margin-top: 35px;
   object-position: center;
   border: thin solid darkgray;
   position: absolute;

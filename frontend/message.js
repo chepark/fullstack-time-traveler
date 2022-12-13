@@ -1,5 +1,5 @@
 import { fetchNewGoal } from "./api.js";
-import { displayMap, updateGoalTime } from "./game.js";
+import { displayMap, updateGoalTime, logOut } from "./game.js";
 import { Game } from "./classes.js";
 
 export function closeMessage() {
@@ -68,5 +68,7 @@ export function gameOverMessage() {
     console.log("gameover");
     displayMap();
     closeMessage();
+    logOut();
+    // change greeting
   });
 }
