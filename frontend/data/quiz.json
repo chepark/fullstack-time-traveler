@@ -86,91 +86,6 @@
   },
   {
     "id": 11,
-    "question": "How many timezones are there in the world?",
-    "option": ["12", "16", "24", "10"],
-    "answer": 2
-  },
-  {
-    "id": 12,
-    "question": "What is the time difference between Pacific time and Eastern time?",
-    "option": [
-      "Pacific time is 3 hours later",
-      "Pacific time is two hours earlier",
-      "Pacific time is 3 hours earlier",
-      "Pacific time is 2 hours later"
-    ],
-    "answer": 0
-  },
-  {
-    "id": 13,
-    "question": "Which of these countries has the highestCO2 emissions  per capita?",
-    "option": ["USA", "China", "India", "UK"],
-    "answer": 1
-  },
-  {
-    "id": 14,
-    "question": "What does the abbreviation EST stand for?",
-    "option": [
-      "East, South Time",
-      "Eastern Southern Time",
-      "Eastern Standard Time",
-      "It doesn't stand for anything"
-    ],
-    "answer": 2
-  },
-  {
-    "id": 15,
-    "question": "How many timezones are there in Finland?",
-    "option": ["3", "2", "5", "1"],
-    "answer": 3
-  },
-  {
-    "id": 16,
-    "question": "The total set of carbon emissions caused by an individual.",
-    "option": [
-      "Carbon Cycle",
-      "Carbon footprint",
-      "Carbon handprint",
-      "Carbon summary"
-    ],
-    "answer": 1
-  },
-  {
-    "id": 17,
-    "question": "What is the most potent greenhouse gas?",
-    "option": [
-      "Fluorinated gases",
-      " Carbon dioxide",
-      " Nitrous gas",
-      "Methane"
-    ],
-    "answer": 0
-  },
-  {
-    "id": 18,
-    "question": "The main human activity that adds to an individual's carbon footprint.",
-    "option": [
-      "Use of alternative energies.",
-      "Respiration and growth",
-      "Photosynthesis by plants",
-      "Use of fossils fuel for energy"
-    ],
-    "answer": 1
-  },
-  {
-    "id": 19,
-    "question": "Which of these choices in transportation produces less greenhouse gas than the others?",
-    "option": ["Airplane", "Walking", "Train", "Car"],
-    "answer": 1
-  },
-  {
-    "id": 20,
-    "question": "Which one is not the fossils fuel?",
-    "option": ["Coal", "Natural gas", "Oil", "Wood"],
-    "answer": 3
-  },
-  {
-    "id": 21,
     "question": "In some countries clocks do what in the spring?",
     "option": [
       "Move ahead 1 hour",
@@ -181,7 +96,7 @@
     "answer": 0
   },
   {
-    "id": 22,
+    "id": 12,
     "question": "What is one advantage of having time zones?",
     "option": [
       "To get to work on time",
@@ -192,7 +107,7 @@
     "answer": 1
   },
   {
-    "id": 23,
+    "id": 13,
     "question": "To calculate the difference in time between two places you need to know:",
     "option": [
       "That there are 15 degrees in an hour",
@@ -203,7 +118,7 @@
     "answer": 3
   },
   {
-    "id": 24,
+    "id": 14,
     "question": "Where is all time measured from?",
     "option": [
       "Greenwich Mean Time",
@@ -214,13 +129,13 @@
     "answer": 3
   },
   {
-    "id": 25,
+    "id": 15,
     "question": "Approximately how wide is each time zone, in degrees?",
     "option": ["5", "10", "15", "20"],
     "answer": 2
   },
   {
-    "id": 26,
+    "id": 16,
     "question": "What does the abbreviation UTC stand for?",
     "option": [
       "United Time Clock",
@@ -231,7 +146,7 @@
     "answer": 3
   },
   {
-    "id": 27,
+    "id": 17,
     "question": "What does the abbreviation GMT stand for?",
     "option": [
       "Great Minds discuss Time",
