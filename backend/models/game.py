@@ -42,7 +42,6 @@ class Game:
 
     # get coordinate info of the location
     def get_coordinate(self, airport_name, target):
-        print('airportname', airport_name)
         sql = "SELECT name, latitude_deg, longitude_deg FROM Airport"
         sql += " WHERE name ='" + airport_name + "'"
 
@@ -69,8 +68,8 @@ class Game:
         response = requests.get(
             f'https://timeapi.io/api/Time/current/coordinate?latitude={airport_latitude}&longitude={airport_longitude}').json()
 
-        print(response)
-        hour = response["hour"]
+        print('time respose',response)
+        hour = int(response["hour"])
         min = response["minute"]
         time = datetime.strptime(f"{hour}:{min}:00", "%H:%M:%S")
         time = time.time().strftime("%H:%M")
@@ -127,6 +126,18 @@ class Game:
             self.get_coordinate(initial_airport, 'current')
 
 
+    # get country
+    def get_country(self, airport_name):
+        sql = "SELECT country.name from country "
+        sql +="INNER JOIN airport ON airport.iso_country=country.code "
+        sql += f"WHERE airport.name='{airport_name}'"
+
+        cursor = config.connection.cursor()
+        cursor.execute(sql)
+        result = cursor.fetchone()
+
+        self.country = result[0]
+        print('self.country', self.country)
 
 
     ### SETTERS ###
@@ -159,7 +170,8 @@ class Game:
         set_default += f"`current_time`='{current_time[0]}', "
         set_default += f"current_hour = {current_time[1]}, "
         set_default += f"goal_time='{goal_time[0]}', "
-        set_default += f"goal_hour={goal_time[1]} "
+        set_default += f"goal_hour={goal_time[1]}, "
+        set_default += f"country='{self.country}' "
         set_default += f"WHERE gameId={gameId}"
 
         cursor = config.connection.cursor()
@@ -174,7 +186,7 @@ class Game:
         cursor.execute(sql)
         result = cursor.fetchone()
         
-        data = {'gameId': result[0], 'userName': result[1], 'score':result[2], 'co2consumed':result[3],'co2benefit':result[4],'co2budget': result[5], 'current_location': result[6], 'current_longitude': result[7], 'current_latitude': result[8], 'current_time': result[9], 'current_hour':result[10],'goal_time': result[11],'goal_hour':result[12]}
+        data = {'gameId': result[0], 'userName': result[1], 'score':result[2], 'co2consumed':result[3],'co2benefit':result[4],'co2budget': result[5], 'current_location': result[6], 'current_longitude': result[7], 'current_latitude': result[8], 'current_time': result[9], 'current_hour':result[10],'goal_time': result[11],'goal_hour':result[12], 'country':result[13]}
         return data
 
 
@@ -187,7 +199,8 @@ class Game:
         set_default += f"current_longitude='{self.current_location['longitude']}', "
         set_default += f"current_latitude='{self.current_location['latitude']}', "
         set_default += f"`current_time`='{self.current_time['time']}', "
-        set_default += f"current_hour = {self.current_time['hour']} "
+        set_default += f"current_hour = {self.current_time['hour']}, "
+        set_default += f"country = '{self.country}' "
         set_default += f"WHERE gameId={gameId}"
         
         cursor = config.connection.cursor()

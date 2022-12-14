@@ -123,7 +123,6 @@ const handleAnswerSubmit = () => {
       const options = document.querySelectorAll("input.quiz-option");
       options.forEach((option) => {
         if (option.value == answer) {
-          console.log(option);
           option.parentElement.style.backgroundColor = green;
           option.parentElement.style.color = "white";
           option.nextElementSibling.classList.add("answer");

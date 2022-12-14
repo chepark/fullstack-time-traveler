@@ -41,6 +41,7 @@ export const fetchNewGame = async (gameid, co2benefit) => {
     const response = await fetch(newGameURL);
     const { data } = await response.json();
 
+    console.log(data);
     return data;
   } catch (error) {
     console.log("Errors in fetching new game:", error);

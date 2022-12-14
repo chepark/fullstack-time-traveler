@@ -7,13 +7,10 @@ export function closeMessage() {
 }
 
 export function successMessage() {
-  console.log("success");
   let message = document.getElementById("popupMessage");
-  // let leftButton = document.getElementById("leftButton");
   let playNextBtn = document.getElementById("rightButton");
 
   message.innerHTML = `Congratulations! <br> You found a right timezones`;
-  // leftButton.innerHTML = `Exit`;
   playNextBtn.innerHTML = `Play Next`;
 
   const popup = document.getElementById("popup");
@@ -38,16 +35,14 @@ export function successMessage() {
 export function failureMessage() {
   const popup = document.getElementById("popup");
   popup.show();
+
   let message = document.getElementById("popupMessage");
-  // let leftButton = document.getElementById("leftButton");
   let tryAgainBtn = document.getElementById("rightButton");
 
   message.innerHTML = `Oops!!! <br> You are in wrong timezones.`;
-  // leftButton.innerHTML = `Exit`;
   tryAgainBtn.innerHTML = `Try Again`;
 
   tryAgainBtn.addEventListener("click", () => {
-    // try the same goal again.
     closeMessage();
     return;
   });
@@ -56,16 +51,14 @@ export function failureMessage() {
 export function gameOverMessage() {
   const popup = document.getElementById("popup");
   popup.show();
+
   let message = document.getElementById("popupMessage");
-  // let leftButton = document.getElementById("leftButton");
   let endBtn = document.getElementById("rightButton");
 
   message.innerHTML = `Game over.<br>Your CO2 budget is over.`;
-  // leftButton.innerHTML = `Exit`;
   endBtn.innerHTML = `END GAME`;
 
   endBtn.addEventListener("click", () => {
-    console.log("gameover");
     displayMap();
     closeMessage();
     logOut();

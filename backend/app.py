@@ -86,17 +86,20 @@ def newGame():
     longitude = game.current_location['longitude']
     latitude = game.current_location['latitude']
     
-    # 2. get initial local time
+    # 2. get country from country table a
+    game.get_country(game.current_location['name'])
+
+    # 3. get initial local time
     current_time = game.get_time(latitude, longitude)
     
-    # 3. generate goal
+    # 4. generate goal
     goal.generate_goal(longitude, latitude)
     goal_time = [goal.time, goal.hour]
 
-    # 4. set necessary data in SQL to start game
+    # 5. set necessary data in SQL to start game
     game.set_default_data(gameId, current_time, goal_time)
   
-    # 5. get data from db & send response
+    # 6. get data from db & send response
     data = game.get_game_data(gameId)
     response = {"data": data, "status": 200}
     
@@ -119,6 +122,8 @@ def draw_result():
     print('new LOC', new_location_name)
     game.new_location['name'] = new_location_name
     game.get_coordinate(new_location_name, 'new')
+
+    game.get_country(new_location_name)
 
     # 2. get new location time from api
     time_data = game.get_time(game.new_location['latitude'], game.new_location['longitude'])
@@ -149,7 +154,7 @@ def draw_result():
     # 3. prepare data for response
     success = goal.is_reached
     game_over = game.game_over
-    data = {'current_time':current_time, 'co2budget': game.co2_budget, 'success': success, 'game_over': game_over}
+    data = {'current_time':current_time, 'co2budget': game.co2_budget, 'success': success, 'country': game.country, 'game_over': game_over}
     response = {"data": data, "status": 200}
     
     # send response

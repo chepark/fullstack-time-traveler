@@ -113,13 +113,11 @@ export const setupNewGame = async () => {
   addMapMarkers(airports);
   map.setView([Game.currentLatitude, Game.currentLongitude], 14);
 
-  console.log(Game.currentLongitude, Game.currentLatitude);
-
   // setup frontend
   updateCO2(Game.co2budget, Game.co2left);
   updateCurrentTime(Game.currentAirport, Game.currentTime);
   updateGoalTime(Game.goalTime);
-  updateGuideLocation(Game.currentAirport, "Finland", Game.currentTime);
+  updateGuideLocation(Game.currentAirport, Game.country, Game.currentTime);
   updateGuideGoal(Game.goalTime);
 };
 
@@ -129,16 +127,19 @@ const runGame = async (airport) => {
 
   // fetch result
   const resultData = await getResult(Game.gameId, airport);
-  const { current_time, co2budget, success, game_over } = resultData;
+  const { current_time, co2budget, success, game_over, country } = resultData;
 
   // display message
   Game.setCurrerntAirport(airport);
+  // Game.setCountry(country);
   Game.setTime(current_time, "current");
   Game.setCo2(co2budget, "co2left");
   Game.setGameOver(game_over);
+  Game.setCountry(country);
 
   updateCO2(5000, Game.co2left);
   updateCurrentTime(Game.currentAirport, Game.currentTime);
+  updateGuideLocation(Game.currentAirport, Game.country, Game.currentTime);
 
   if (game_over) {
     gameOverMessage();

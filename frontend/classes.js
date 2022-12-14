@@ -10,6 +10,7 @@ export class Game {
   static currentLongitude = undefined;
   static currentLatitude = undefined;
   static currentAirport = undefined;
+  static country = undefined;
   static gameOver = false;
 
   static setGameId(id) {
@@ -22,6 +23,10 @@ export class Game {
 
   static setCo2Benefit(benefit) {
     this.co2benefit = benefit;
+  }
+
+  static setCountry(country) {
+    this.country = country;
   }
 
   static setGameOver() {
@@ -65,6 +70,7 @@ export class Game {
       current_hour,
       goal_time,
       goal_hour,
+      country,
     } = data;
     this.co2budget = Math.ceil(co2budget);
     this.co2consumed = Math.ceil(co2consumed);
@@ -76,5 +82,6 @@ export class Game {
     this.goalTime = goal_time;
     this.goalHour = goal_hour;
     this.co2left = this.co2budget - this.co2consumed;
+    this.country = country;
   }
 }
