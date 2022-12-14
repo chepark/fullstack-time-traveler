@@ -1,16 +1,6 @@
-import {
-  fetchAllAirports,
-  fetchNewGame,
-  getResult,
-  fetchNewGoal,
-} from "./api.js";
+import { fetchAllAirports, fetchNewGame, getResult } from "./api.js";
 import { Game } from "./classes.js";
-import {
-  closeMessage,
-  successMessage,
-  failureMessage,
-  gameOverMessage,
-} from "./message.js";
+import { successMessage, failureMessage, gameOverMessage } from "./message.js";
 
 // Init the map
 const map = L.map("map", { tap: false });
@@ -24,7 +14,6 @@ export const displayMap = () => {
   map.setView([60, 25], 7);
 };
 
-// const popup = L.popup(); // show pop up
 const blueIcon = L.divIcon({ className: "blue-icon" });
 const greenIcon = L.divIcon({ className: "green-icon" });
 
@@ -70,7 +59,7 @@ function changeGourpColor(colorIcon) {
 
 //CO2 INDICATOR
 // function to update CO2 indicator
-function updateCO2(CO2budget, CO2left) {
+export function updateCO2(CO2budget, CO2left) {
   let percentCalculator = (CO2left * 100) / CO2budget;
   let percentCO2Left = percentCalculator.toString() + "%";
   document.getElementById("budget").innerHTML =
@@ -79,7 +68,7 @@ function updateCO2(CO2budget, CO2left) {
 }
 
 //function to update current time in the right panel
-function updateCurrentTime(currentLocation, currentTime) {
+export function updateCurrentTime(currentLocation, currentTime) {
   let value = document.getElementById("currentTime");
   value.innerHTML = currentLocation + "<br>Current time <br><br>" + currentTime;
 }
@@ -87,7 +76,7 @@ function updateCurrentTime(currentLocation, currentTime) {
 //function to update goal time in the right panel
 export function updateGoalTime(goalTime) {
   let gtime = document.getElementById("goalTime");
-  gtime.innerHTML = "Goal Time <br><br>" + goalTime;
+  gtime.innerHTML = "<br>Goal Time <br><br>" + goalTime;
 }
 
 //functions to update guide messages
@@ -96,9 +85,27 @@ function updateGuideLocation(currentAirport, currentCountry, currentTime) {
   location.innerHTML = `Time Traveler: <br>You are now in ${currentAirport} in ${currentCountry}. Local time is ${currentTime}.`;
 }
 
-function updateGuideGoal(goalTime) {
+export function updateGuideGoal(goalTime) {
   let timeToFind = document.getElementById("timeTravelerGoal");
   timeToFind.innerHTML = `Time Traveler: <br>Please find the airport located in the goal time zone. The goal time is ${goalTime}.`;
+}
+
+export function controlGuideInitDislay(status) {
+  let init = document.getElementById("timeTravlerInit");
+  init.style.display = status;
+}
+
+export function controlHelpGuideDisplay(status) {
+  let helpGuide = document.getElementById("timeTravelHelp");
+  helpGuide.style.display = status;
+}
+
+export function controlGuideLocationGoal(status) {
+  let location = document.getElementById("timeTravelerLocation");
+  let timeToFind = document.getElementById("timeTravelerGoal");
+
+  location.style.display = status;
+  timeToFind.style.display = status;
 }
 
 export const setupNewGame = async () => {
@@ -114,6 +121,8 @@ export const setupNewGame = async () => {
   map.setView([Game.currentLatitude, Game.currentLongitude], 14);
 
   // setup frontend
+  controlGuideInitDislay("none");
+  controlHelpGuideDisplay("block");
   updateCO2(Game.co2budget, Game.co2left);
   updateCurrentTime(Game.currentAirport, Game.currentTime);
   updateGoalTime(Game.goalTime);
@@ -164,9 +173,9 @@ export const logOut = () => {
   logIn.firstElementChild.value = "";
 };
 
-//TESTING VALUES
+// Initial frontend setup
 updateCO2(5000, 5000);
-updateCurrentTime("Helsinki Airport", "6:30");
-updateGoalTime("4:30");
-updateGuideLocation("Helsinki Airport", "Finland", "6:30");
-updateGuideGoal("4:30");
+updateCurrentTime("", "-");
+updateGoalTime("-");
+controlGuideInitDislay("block");
+controlHelpGuideDisplay("none");

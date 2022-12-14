@@ -9,14 +9,12 @@ header {
 }
 
 .logo {
-  /* width: 60vw; */
   align-items: center;
   display: flex;
 }
 
 .header_title {
   margin-left: 1rem;
-  /* width: 40vw; */
 }
 
 .header_picture img {
@@ -30,7 +28,6 @@ header {
 
 .textarea_container {
   max-width: 400px;
-  /* height: 3vw; */
   align-items: center;
 
   display: flex;
@@ -56,14 +53,3 @@ header {
   margin-top: 0.5rem;
   margin-left: 0.5rem;
 }
-
-/* .textarea_container button {
-  position: relative;
-  width: 6vw;
-  height: 2vw;
-  background-color: #58db8f;
-  border-radius: 16px;
-  border-color: azure;
-
-  color: white;
-} */

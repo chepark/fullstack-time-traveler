@@ -16,9 +16,6 @@ let quizCounter = 0;
 let correctAnswers = 0;
 let userChoice;
 
-// const red = "#e2393e";
-// const green = "#58db8f";
-
 const handleReject = () => {
   quizModal.style.display = "none";
 };
@@ -131,7 +128,6 @@ const handleAnswerSubmit = () => {
     } else {
       correctAnswers += 1;
     }
-    // check user answer
   });
 };
 

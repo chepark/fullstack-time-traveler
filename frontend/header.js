@@ -27,8 +27,6 @@ nameSubmitBtn.addEventListener("click", async (e) => {
   Game.setGameId(game_id);
   Game.setUserName(userName);
 
-  console.log(Game.gameId);
-
   // turn off name input field.
   inputContainer.style.display = "none";
 
@@ -36,7 +34,14 @@ nameSubmitBtn.addEventListener("click", async (e) => {
   userNameDisplay.textContent = `${Game.userName}`;
 
   // open quiz model
+  const quizPermission = document.getElementById("quiz-permission");
+  const quizResult = document.getElementById("quiz-result");
   quizModal.style.display = "block";
+  // turn of the previous screen
+  if (quizResult.style.display !== "none") quizResult.style.display = "none";
+
+  quizPermission.style.display = "block";
+
   // display greeting on quiz modal
   const greeting = document.getElementById("greeting");
   greeting.textContent = `Hello, ${Game.userName}!`;

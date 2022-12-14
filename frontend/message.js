@@ -1,6 +1,17 @@
 import { fetchNewGoal } from "./api.js";
-import { displayMap, updateGoalTime, logOut } from "./game.js";
+import {
+  displayMap,
+  updateCO2,
+  updateCurrentTime,
+  updateGoalTime,
+  updateGuideGoal,
+  controlHelpGuideDisplay,
+  controlGuideInitDislay,
+  logOut,
+  controlGuideLocationGoal,
+} from "./game.js";
 import { Game } from "./classes.js";
+import { red } from "./utils.js";
 
 export function closeMessage() {
   popup.close();
@@ -27,6 +38,7 @@ export function successMessage() {
 
       Game.setNewGoal(new_goal);
       updateGoalTime(Game.goalTime);
+      updateGuideGoal(Game.goalTime);
       closeMessage();
     }
   });
@@ -56,12 +68,19 @@ export function gameOverMessage() {
   let endBtn = document.getElementById("rightButton");
 
   message.innerHTML = `Game over.<br>Your CO2 budget is over.`;
+  endBtn.style.backgroundColor = red;
   endBtn.innerHTML = `END GAME`;
 
   endBtn.addEventListener("click", () => {
     displayMap();
     closeMessage();
     logOut();
-    // change greeting
+
+    updateCO2(5000, 5000);
+    updateCurrentTime("", "-");
+    updateGoalTime("-");
+    controlGuideInitDislay("block");
+    controlHelpGuideDisplay("none");
+    controlGuideLocationGoal("none");
   });
 }
