@@ -5,6 +5,7 @@ Time Traveler is a game. A user is given a time as a goal. The user's task is to
 <p align="center">
   <img width="800px" height="auto" src="./images/timetraveler.png">
 </p>
+
 ## 📌 1. Purpose
 
 The game was created to help students get concrete ideas about the time zone system and geographical locations of cities around the world through visualization.
