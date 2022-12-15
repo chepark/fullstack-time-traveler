@@ -2,6 +2,9 @@
 
 Time Traveler is a game. A user is given a time as a goal. The user's task is to find the airport where has the same time as the goal.
 
+<p align="center">
+  <img width="800px" height="auto" src="./images/timetraveler.png">
+</p>
 ## 📌 1. Purpose
 
 The game was created to help students get concrete ideas about the time zone system and geographical locations of cities around the world through visualization.
@@ -30,11 +33,6 @@ The game was created to help students get concrete ideas about the time zone sys
 - `main.css`: All `.css` files are called in this file.
 - `common.css`: Main fonts and colors are stored.
 - `quiz.css`, `header.css`, `game.css`, `message.css`, `timezone.css`: Styles related to the certain UI are located.
-
-- Frontend: JavaScript, CSS, HTML
-- Backend: Python, Flask
-- Server: SQL, MySQL
-- Design: Figma, AdobeXD
 
 ## ⚙️ 3. How to run locally
 
