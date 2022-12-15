@@ -8,10 +8,12 @@ class User():
     def get_user(self, name): 
         sql = "SELECT gameId, userName, max(score) FROM game"
         sql += " WHERE userName='" + name + "'"
-
+       
         cursor = config.connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchone() 
+
+        print('SQL',sql)
 
         # if user exist, return user's name and user's highest score
         if result[0] != None:
@@ -32,7 +34,8 @@ class User():
                 "game_id": gameId,
                 "max_score": max_score, 
                 }
-            
+            print('data',data)
+
             return data
             
         # if user does not exist, insert user's name into db (insert both name and score after user finish the game)

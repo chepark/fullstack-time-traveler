@@ -36,6 +36,7 @@ nameSubmitBtn.addEventListener("click", async (e) => {
   // open quiz model
   const quizPermission = document.getElementById("quiz-permission");
   const quizResult = document.getElementById("quiz-result");
+
   quizModal.style.display = "block";
   // turn of the previous screen
   if (quizResult.style.display !== "none") quizResult.style.display = "none";

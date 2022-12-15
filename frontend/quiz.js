@@ -61,7 +61,7 @@ const formatQuizInHtml = () => {
     </fieldset>
     <div class="quiz-btns" data-submitted="false">
         <button id="quiz-submit" class="btn-bg__grey">SUBMIT</button>
-        <button id="quiz-next" class="btn-bg__grey">NEXT QUIZ</button>
+        <button id="quiz-next" class="btn-bg__grey">NEXT QUESTION</button>
     </div>
     `;
     selectedQuizHtml.push(quizInHtml);

@@ -189,7 +189,6 @@ class Game:
         data = {'gameId': result[0], 'userName': result[1], 'score':result[2], 'co2consumed':result[3],'co2benefit':result[4],'co2budget': result[5], 'current_location': result[6], 'current_longitude': result[7], 'current_latitude': result[8], 'current_time': result[9], 'current_hour':result[10],'goal_time': result[11],'goal_hour':result[12], 'country':result[13]}
         return data
 
-
     # update data in DB
     def update_db(self, gameId):
         set_default = "UPDATE game SET "

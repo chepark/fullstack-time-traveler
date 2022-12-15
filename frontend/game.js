@@ -2,7 +2,7 @@ import { fetchAllAirports, fetchNewGame, getResult } from "./api.js";
 import { Game } from "./classes.js";
 import { successMessage, failureMessage, gameOverMessage } from "./message.js";
 
-// Init the map
+// init the map
 const map = L.map("map", { tap: false });
 
 export const displayMap = () => {
@@ -14,32 +14,36 @@ export const displayMap = () => {
   map.setView([60, 25], 7);
 };
 
+// green, blue markers on the map
 const blueIcon = L.divIcon({ className: "blue-icon" });
 const greenIcon = L.divIcon({ className: "green-icon" });
+let initialMarker;
 
 const airportMarkers = L.featureGroup().addTo(map);
 airportMarkers.clearLayers();
 
-export const addMapMarkers = (airports) => {
+const addMapMarkers = (airports) => {
   airports.map((airport) => {
     const marker = L.marker([airport.latitude, airport.longitude])
       .addTo(map)
       .setIcon(blueIcon)
       .bindPopup(`<b>${airport.name}</b>`);
 
+    // show popup on mouseover
     marker.on("mouseover", function (e) {
       this.openPopup();
     });
 
+    // hide popup on mouseout
     marker.on("mouseout", function (e) {
       this.closePopup();
     });
 
+    // change marker color on click
     marker.on("click", function (e) {
       if (confirm(`Do you want to fly to ${airport.name}`)) {
         changeGourpColor(blueIcon);
         this.setIcon(greenIcon);
-
         // run game
         runGame(airport.name);
       } else {
@@ -56,6 +60,17 @@ function changeGourpColor(colorIcon) {
     layer.setIcon(colorIcon);
   });
 }
+
+// const showInitialMarker = (lat, lng) => {
+//   const marker = L.marker([lat, lng], { icon: greenIcon });
+
+//   initialMarker = marker;
+//   initialMarker.addTo(map);
+// };
+
+// const hideInitialMarker = () => {
+//   map.removeLayer(initialMarker);
+// };
 
 //CO2 INDICATOR
 // function to update CO2 indicator
@@ -119,6 +134,7 @@ export const setupNewGame = async () => {
   // draw map
   addMapMarkers(airports);
   map.setView([Game.currentLatitude, Game.currentLongitude], 14);
+  // showInitialMarker(Game.currentLatitude, Game.currentLongitude);
 
   // setup frontend
   controlGuideInitDislay("none");
@@ -130,7 +146,15 @@ export const setupNewGame = async () => {
   updateGuideGoal(Game.goalTime);
 };
 
+//
+let selectedFirstAirport = false;
+
 const runGame = async (airport) => {
+  if (!selectedFirstAirport) {
+    // hideInitialMarker();
+    selectedFirstAirport = true;
+  }
+
   // transform airport name
   Game.setCurrerntAirport(airport);
 
