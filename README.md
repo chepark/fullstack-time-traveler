@@ -3,7 +3,7 @@
 Time Traveler is a game. A user is given a time as a goal. The user's task is to find the airport where has the same time as the goal.
 
 <p align="center">
-  <img width="800px" height="auto" src="./images/timetraveler.png">
+  <img width="800px" height="auto" src="./public/timetraveler.png">
 </p>
 
 ## 📌 1. Purpose
@@ -13,7 +13,7 @@ The game was created to help students get concrete ideas about the time zone sys
 ## 🏗️ 2. Architecture
 
 <p align="center">
-  <img width="800px" height="auto" src="./images/architecture.png">
+  <img width="800px" height="auto" src="./public/architecture.png">
 </p>
 
 ### 2.2 Backend
@@ -72,5 +72,5 @@ DB_PASS='YOUR PASSWORD'
 ## 🎨 5. UI
 
 <p align="center">
-  <img width="800px" height="auto" src="./images/ui-design.png">
+  <img width="800px" height="auto" src="./public/ui-design.png">
 </p>
