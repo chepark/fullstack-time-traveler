@@ -8,7 +8,7 @@ export const fetchAllAirports = async () => {
 
     const response = await fetch(allAirportsURL);
     const { data } = await response.json();
-
+    console.log("LARGE AIRPORTS:", data);
     return data;
   } catch (error) {
     console.log("Errors in fetching aiports:", error);
@@ -41,7 +41,7 @@ export const fetchNewGame = async (gameid, co2benefit) => {
     const response = await fetch(newGameURL);
     const { data } = await response.json();
 
-    console.log(data);
+    console.log("NEW GAME DATA: ", data);
     return data;
   } catch (error) {
     console.log("Errors in fetching new game:", error);
@@ -56,6 +56,7 @@ export const getResult = async (gameId, airportName) => {
     const encodedURL = encodeURI(resultURL);
     const response = await fetch(encodedURL);
     const { data } = await response.json();
+    console.log("RESULT:", data);
     return data;
   } catch (error) {
     console.log("Errors in getting results:", error);

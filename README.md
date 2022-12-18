@@ -62,12 +62,13 @@ DB_PASS='YOUR PASSWORD'
 
 ## 4. 🧰 Technology
 
-| Category | Technology            |
-| -------- | --------------------- |
-| FrontEnd | JavaScript, HTML, CSS |
-| BackEnd  | Python, Flask         |
-| Database | SQL, MySQL            |
-| DESIGN   | Figma                 |
+| Category      | Technology                                        |
+| ------------- | ------------------------------------------------- |
+| FrontEnd      | JavaScript, HTML, CSS                             |
+| BackEnd       | Python, Flask                                     |
+| Database      | SQL, MySQL                                        |
+| 3rd party API | [Time API](https://timeapi.io/swagger/index.html) |
+| Design        | Figma                                             |
 
 ## 🎨 5. UI
 
