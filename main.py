@@ -2,9 +2,10 @@ import os
 import random
 from decimal import *
 
-from flask import Flask, request, Response, g
+from flask import Flask, request, Response, render_template
 from flask_cors import CORS
 import mysql.connector
+
 from dotenv import load_dotenv
 from urllib.parse import unquote
 
@@ -19,15 +20,28 @@ from models.user import User
 
 load_dotenv()
 
+
 # CONNECT TO DB
+# config.connection = mysql.connector.connect(
+#     host=os.environ.get('HOST'),
+#     port=3306,
+#     database=os.environ.get('DB_NAME'),
+#     user=os.environ.get('DB_USER'),
+#     password=os.environ.get('DB_PASS'),
+#     autocommit=True,
+# )
+
+
 config.connection = mysql.connector.connect(
-    host=os.environ.get('HOST'),
-    port=3306,
-    database=os.environ.get('DB_NAME'),
-    user=os.environ.get('DB_USER'),
-    password=os.environ.get('DB_PASS'),
+    host=os.environ.get('MYSQLHOST'),
+    port=6280,
+    database=os.environ.get('MYSQLDATABASE'),
+    user=os.environ.get('MYSQLUSER'),
+    passwd=os.environ.get('MYSQLPASSWORD'),
     autocommit=True
 )
+
+print('DB connected? ',config.connection.is_connected())
 
 def handleError(error_message): 
     response = {"error":error_message, "status": 500}
@@ -38,6 +52,10 @@ app = Flask(__name__)
 # HANDLE CORS ISSUE
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 # TESTING URL: 
 # http://127.0.0.1:5000/airport/all
@@ -56,6 +74,7 @@ def get_all_airports():
 # http://127.0.0.1:5000/user/sophie
 @app.route('/user/<name>')
 def get_user(name):
+    print('name',name)
     try: 
         user = User()
 
@@ -192,4 +211,5 @@ def generate_new_goal():
 
 
 if __name__ == '__main__':
-    app.run(use_reloader=True, host='127.0.0.1', port=5000)
+    app.run(use_reloader=True, host='0.0.0.0', port=5000, debug=True)
+

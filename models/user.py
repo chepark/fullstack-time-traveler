@@ -11,9 +11,9 @@ class User():
        
         cursor = config.connection.cursor()
         cursor.execute(sql)
-        result = cursor.fetchone() 
-
-        print('SQL',sql)
+        
+        result = cursor.fetchone()
+        print(result)
 
         # if user exist, return user's name and user's highest score
         if result[0] != None:
