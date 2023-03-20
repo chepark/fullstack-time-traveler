@@ -1,5 +1,5 @@
 // all api requests
-const BASE_URL = "https://flask-production-9c41.up.railway.app";
+const BASE_URL = "http://127.0.0.1:5000";
 
 // Data: list of aiports
 export const fetchAllAirports = async () => {

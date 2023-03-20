@@ -21,25 +21,24 @@ from models.user import User
 load_dotenv()
 
 
-# CONNECT TO DB
-# config.connection = mysql.connector.connect(
-#     host=os.environ.get('HOST'),
-#     port=3306,
-#     database=os.environ.get('DB_NAME'),
-#     user=os.environ.get('DB_USER'),
-#     password=os.environ.get('DB_PASS'),
-#     autocommit=True,
-# )
-
-
 config.connection = mysql.connector.connect(
-    host=os.environ.get('MYSQLHOST'),
-    port=6280,
-    database=os.environ.get('MYSQLDATABASE'),
-    user=os.environ.get('MYSQLUSER'),
-    passwd=os.environ.get('MYSQLPASSWORD'),
-    autocommit=True
+    host=os.environ.get('HOST'),
+    port=3306,
+    database=os.environ.get('DB_NAME'),
+    user=os.environ.get('DB_USER'),
+    password=os.environ.get('DB_PASS'),
+    autocommit=True,
 )
+
+
+# config.connection = mysql.connector.connect(
+#     host=os.environ.get('MYSQLHOST'),
+#     port=6280,
+#     database=os.environ.get('MYSQLDATABASE'),
+#     user=os.environ.get('MYSQLUSER'),
+#     passwd=os.environ.get('MYSQLPASSWORD'),
+#     autocommit=True
+# )
 
 print('DB connected? ',config.connection.is_connected())
 
@@ -77,7 +76,6 @@ def get_user(name):
     print('name',name)
     try: 
         user = User()
-
         data = user.get_user(name)
         response = {"data": data, "status": 200}
         return response
